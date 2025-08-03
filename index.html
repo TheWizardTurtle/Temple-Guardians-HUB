@@ -209,7 +209,6 @@
 </head>
 <body>
   <canvas id="stars"></canvas>
-
   <div class="loader" id="loader">
     <div class="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
@@ -223,13 +222,11 @@
       <div class="code-stream right-stream" id="code-right"></div>
     </div>
   </div>
-
   <div id="main-content">
     <header>
       <h1>Temple Guardians // TNJO</h1>
       <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
     </header>
-
     <section>
       <h2 class="section-title">Core Resources</h2>
       <div class="card">
@@ -249,13 +246,25 @@
         <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
       </div>
     </section>
-
     <footer>
       &copy; 2025 Temple Guardians — All Rights Reserved.
     </footer>
   </div>
-
   <script>
+    const codeLeft = document.getElementById("code-left");
+    const codeRight = document.getElementById("code-right");
+    function generateCodeLines(lines = 50) {
+      const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+      let left = "", right = "";
+      for (let i = 0; i < lines; i++) {
+        const len = Math.floor(Math.random() * 30 + 20);
+        const line = Array.from({length: len}, () => galacticBase[Math.floor(Math.random() * galacticBase.length)]).join("");
+        left += line + "\n";
+        right = line + "\n" + right;
+      }
+      codeLeft.textContent = left;
+      codeRight.textContent = right;
+    }
     document.addEventListener("DOMContentLoaded", () => {
       const loader = document.getElementById("loader");
       const mainContent = document.getElementById("main-content");
@@ -271,9 +280,9 @@
         } else {
           count++;
           document.getElementById("percent").textContent = `${count}%`;
+          if (count % 3 === 0) generateCodeLines();
         }
       }, 60);
-
       const canvas = document.getElementById('stars');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
