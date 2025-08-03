@@ -49,6 +49,7 @@
     .loader.hidden {
       opacity: 0;
       transform: scale(1.05) skewY(2deg);
+      pointer-events: none;
     }
 
     .flash-brief {
@@ -232,14 +233,16 @@
     </div>
   </div>
 
-  <header data-aos="fade-in">
-    <h1>Temple Guardians // TNJO</h1>
-    <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
-  </header>
+  <div id="main-content" style="display: none;">
+    <header data-aos="fade-in">
+      <h1>Temple Guardians // TNJO</h1>
+      <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
+    </header>
 
-  <footer>
-    &copy; 2025 Temple Guardians — All Rights Reserved.
-  </footer>
+    <footer>
+      &copy; 2025 Temple Guardians — All Rights Reserved.
+    </footer>
+  </div>
 
   <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
   <audio id="ambientSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_368f458c89.mp3" preload="auto" loop></audio>
@@ -266,89 +269,93 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
-  </script><script>
-  const loader = document.getElementById("loader");
-  const percent = document.getElementById("percent");
-  const codeLeft = document.getElementById("code-left");
-  const codeRight = document.getElementById("code-right");
-  const cornerTitle = document.getElementById("corner-title");
-  const logo = document.getElementById("jediLogo");
-  const insignia = document.getElementById("sentinelInsignia");
-  const accessMessage = document.getElementById("accessMessage");
-  const systemsText = document.getElementById("systemsText");
-  const bootSound = document.getElementById("bootSound");
-  const ambientSound = document.getElementById("ambientSound");
+  </script>
 
-  const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
-  const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+  <script>
+    const loader = document.getElementById("loader");
+    const mainContent = document.getElementById("main-content");
+    const percent = document.getElementById("percent");
+    const codeLeft = document.getElementById("code-left");
+    const codeRight = document.getElementById("code-right");
+    const cornerTitle = document.getElementById("corner-title");
+    const logo = document.getElementById("jediLogo");
+    const insignia = document.getElementById("sentinelInsignia");
+    const accessMessage = document.getElementById("accessMessage");
+    const systemsText = document.getElementById("systemsText");
+    const bootSound = document.getElementById("bootSound");
+    const ambientSound = document.getElementById("ambientSound");
 
-  function randomText(len) {
-    let out = "";
-    for (let i = 0; i < len; i++) {
-      out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
-    }
-    return out;
-  }
+    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
+    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
 
-  function generateCodeLines(lines = 50) {
-    let left = "", right = "";
-    for (let i = 0; i < lines; i++) {
-      const len = Math.floor(Math.random() * 30 + 20);
-      const line = randomText(len);
-      left += line + "\n";
-      right = line + "\n" + right;
-    }
-    codeLeft.textContent = left;
-    codeRight.textContent = right;
-  }
-
-  function scrambleText(element, finalText, speed = 50, delayBeforeReveal = 800) {
-    const chars = galacticBase;
-    let iteration = 0;
-    const interval = setInterval(() => {
-      element.textContent = finalText.split('').map((char, i) => {
-        if (i < iteration) return char;
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      if (iteration >= finalText.length) clearInterval(interval);
-      iteration++;
-    }, speed);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    bootSound.volume = 0.8;
-    ambientSound.volume = 0.3;
-    bootSound.play().catch(() => {});
-    ambientSound.play().catch(() => {});
-
-    generateCodeLines();
-
-    let count = 0;
-    const interval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(interval);
-        loader.classList.add("hidden");
-      } else {
-        count++;
-        percent.textContent = `${count}%`;
-        if (count % 3 === 0) generateCodeLines();
-        if (count >= 15) cornerTitle.style.opacity = 1;
-        if (count === 20) logo.style.opacity = 0.5;
-        if (count === 30) {
-          logo.style.opacity = 1;
-          insignia.style.opacity = 1;
-        }
-        if (count === 40) {
-          accessMessage.style.opacity = 1;
-          const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-          scrambleText(accessMessage, phrase, 60, 1200);
-        }
-        if (count === 60) {
-          systemsText.textContent = "// Systems Online // Awaiting Entry";
-        }
+    function randomText(len) {
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
       }
-    }, 60);
-  });
-</script>
+      return out;
+    }
+
+    function generateCodeLines(lines = 50) {
+      let left = "", right = "";
+      for (let i = 0; i < lines; i++) {
+        const len = Math.floor(Math.random() * 30 + 20);
+        const line = randomText(len);
+        left += line + "\n";
+        right = line + "\n" + right;
+      }
+      codeLeft.textContent = left;
+      codeRight.textContent = right;
+    }
+
+    function scrambleText(element, finalText, speed = 50) {
+      const chars = galacticBase;
+      let iteration = 0;
+      const interval = setInterval(() => {
+        element.textContent = finalText.split('').map((char, i) => {
+          if (i < iteration) return char;
+          return chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+        if (iteration >= finalText.length) clearInterval(interval);
+        iteration++;
+      }, speed);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      bootSound.volume = 0.8;
+      ambientSound.volume = 0.3;
+      bootSound.play().catch(() => {});
+      ambientSound.play().catch(() => {});
+
+      generateCodeLines();
+
+      let count = 0;
+      const interval = setInterval(() => {
+        if (count >= 100) {
+          clearInterval(interval);
+          loader.classList.add("hidden");
+          setTimeout(() => mainContent.style.display = 'block', 1000);
+        } else {
+          count++;
+          percent.textContent = `${count}%`;
+          if (count % 3 === 0) generateCodeLines();
+          if (count >= 15) cornerTitle.style.opacity = 1;
+          if (count === 20) logo.style.opacity = 0.5;
+          if (count === 30) {
+            logo.style.opacity = 1;
+            insignia.style.opacity = 1;
+          }
+          if (count === 40) {
+            accessMessage.style.opacity = 1;
+            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+            scrambleText(accessMessage, phrase, 60);
+          }
+          if (count === 60) {
+            systemsText.textContent = "// Systems Online // Awaiting Entry";
+          }
+        }
+      }, 60);
+    });
+  </script>
 </body>
 </html>
