@@ -64,22 +64,34 @@
       font-weight: bold;
     }
 
+    .sentinel-insignia {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: auto;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      z-index: 1;
+    }
+
     .code-columns {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       height: 100%;
-      padding: 0 10vw;
+      padding: 0 15vw;
     }
 
     .code-stream {
-      width: 35vw;
+      width: 30vw;
       color: #f6c93b;
-      font-size: 20px;
-      line-height: 1.8;
+      font-size: 22px;
+      line-height: 1.6;
       font-family: monospace;
       white-space: pre;
-      opacity: 0.2;
+      opacity: 0.25;
       height: 100vh;
       overflow: hidden;
     }
@@ -186,6 +198,7 @@
   <div class="loader" id="loader">
     <div class="corner-title" id="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
+    <img src="/mnt/data/83a719476a3147f4def674dcab2593ae__1_-removebg-preview.png" alt="Jedi Sentinels Logo" class="sentinel-insignia" id="sentinelInsignia" />
     <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
     <div class="code-columns">
       <div class="code-stream left-stream" id="code-left"></div>
@@ -233,7 +246,8 @@
     const codeRight = document.getElementById("code-right");
     const logo = document.getElementById("jediLogo");
     const cornerTitle = document.getElementById("corner-title");
-    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᚫᚱ᛻ᛱ᛹ᛉᛄᛌᛅᛊ";
+    const insignia = document.getElementById("sentinelInsignia");
+    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᚱ᛽ᛱ᛹ᛉᚴᛌᛅᛊᛆ";
 
     function randomText(len) {
       let out = "";
@@ -268,7 +282,10 @@
         if (count % 4 === 0) generateCodeLines();
         if (count >= 20) cornerTitle.style.opacity = 1;
         if (count >= 50) logo.style.opacity = 0.5;
-        if (count >= 80) logo.style.opacity = 1;
+        if (count >= 80) {
+          logo.style.opacity = 1;
+          insignia.style.opacity = 1;
+        }
       }
     }, 80);
   </script>
