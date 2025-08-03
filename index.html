@@ -256,57 +256,60 @@
   <script>
     AOS.init();
 
-    const loader = document.getElementById("loader");
-    const percent = document.getElementById("percent");
-    const codeLeft = document.getElementById("code-left");
-    const codeRight = document.getElementById("code-right");
-    const cornerTitle = document.getElementById("corner-title");
-    const logo = document.getElementById("jediLogo");
-    const insignia = document.getElementById("sentinelInsignia");
-    const accessMessage = document.getElementById("accessMessage");
-    const sound = document.getElementById("bootSound");
+const loader = document.getElementById("loader");
+const percent = document.getElementById("percent");
+const codeLeft = document.getElementById("code-left");
+const codeRight = document.getElementById("code-right");
+const cornerTitle = document.getElementById("corner-title");
+const logo = document.getElementById("jediLogo");
+const insignia = document.getElementById("sentinelInsignia");
+const accessMessage = document.getElementById("accessMessage");
+const sound = document.getElementById("bootSound");
 
-    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
-    let count = 0;
+const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+let count = 0;
 
-    function randomText(len) {
-      let out = "";
-      for (let i = 0; i < len; i++) {
-        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
-      }
-      return out;
-    }
+function randomText(len) {
+  let out = "";
+  for (let i = 0; i < len; i++) {
+    out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
+  }
+  return out;
+}
 
-    function generateCodeLines(lines = 50) {
-      let left = "";
-      let right = "";
-      for (let i = 0; i < lines; i++) {
-        let len = Math.floor(Math.random() * 30 + 20);
-        const line = randomText(len);
-        left += line + "\n";
-        right = line + "\n" + right;
-      }
-      codeLeft.textContent = left;
-      codeRight.textContent = right;
-    }
+function generateCodeLines(lines = 50) {
+  let left = "";
+  let right = "";
+  for (let i = 0; i < lines; i++) {
+    let len = Math.floor(Math.random() * 30 + 20);
+    const line = randomText(len);
+    left += line + "\n";
+    right = line + "\n" + right;
+  }
+  codeLeft.textContent = left;
+  codeRight.textContent = right;
+}
 
-    generateCodeLines();
-    sound.play();
+generateCodeLines();
+sound.play();
 
-    const interval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(interval);
-        loader.classList.add("hidden");
-      } else {
-        count++;
-        percent.textContent = `${count}%`;
-        if (count % 4 === 0) generateCodeLines();
-        if (count >= 20) cornerTitle.style.opacity = 1;
-        if (count >= 50) logo.style.opacity = 0.5;
-        if (count >= 80) logo.style.opacity = 1;
-        if (count >= 90) insignia.style.opacity = 1;
-        if (count === 99) accessMessage.style.opacity = 1;
-      }
+const interval = setInterval(() => {
+  if (count >= 100) {
+    clearInterval(interval);
+    loader.classList.add("hidden");
+  } else {
+    count++;
+    percent.textContent = `${count}%`;
+    if (count % 4 === 0) generateCodeLines();
+    if (count >= 20) cornerTitle.style.opacity = 1;
+    if (count >= 40) logo.style.opacity = 0.5;
+    if (count >= 60) insignia.style.opacity = 0.3;
+    if (count >= 70) logo.style.opacity = 1;
+    if (count >= 80) insignia.style.opacity = 1;
+    if (count >= 90) accessMessage.style.opacity = 0.7;
+    if (count === 95) accessMessage.style.opacity = 1;
+  }
+}, 70); // sl
     }, 80);
   </script>
 </body>
