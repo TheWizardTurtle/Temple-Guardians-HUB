@@ -39,6 +39,8 @@
       font-size: 2rem;
       color: #f6c93b;
       letter-spacing: 2px;
+      opacity: 0.3;
+      transition: opacity 2s ease-in-out;
     }
 
     .loader .percent {
@@ -50,18 +52,30 @@
       font-weight: bold;
     }
 
+    .jedi-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      font-size: 1.5rem;
+      color: #f6c93b;
+      font-weight: bold;
+    }
+
     .code-columns {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       height: 100%;
-      gap: 10vw;
+      padding: 0 10vw;
     }
 
     .code-stream {
-      width: 30vw;
+      width: 35vw;
       color: #f6c93b;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.8;
       font-family: monospace;
       white-space: pre;
@@ -170,8 +184,9 @@
 </head>
 <body>
   <div class="loader" id="loader">
-    <div class="corner-title">TEMPLE GUARDIANS</div>
+    <div class="corner-title" id="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
+    <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
     <div class="code-columns">
       <div class="code-stream left-stream" id="code-left"></div>
       <div class="code-stream right-stream" id="code-right"></div>
@@ -216,6 +231,8 @@
     const percent = document.getElementById("percent");
     const codeLeft = document.getElementById("code-left");
     const codeRight = document.getElementById("code-right");
+    const logo = document.getElementById("jediLogo");
+    const cornerTitle = document.getElementById("corner-title");
     const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᚫᚱ᛻ᛱ᛹ᛉᛄᛌᛅᛊ";
 
     function randomText(len) {
@@ -230,7 +247,7 @@
       let left = "";
       let right = "";
       for (let i = 0; i < lines; i++) {
-        let len = Math.floor(Math.random() * 30 + 30);
+        let len = Math.floor(Math.random() * 30 + 20);
         const line = randomText(len);
         left += line + "\n";
         right = line + "\n" + right;
@@ -249,6 +266,9 @@
         count++;
         percent.textContent = `${count}%`;
         if (count % 4 === 0) generateCodeLines();
+        if (count >= 20) cornerTitle.style.opacity = 1;
+        if (count >= 50) logo.style.opacity = 0.5;
+        if (count >= 80) logo.style.opacity = 1;
       }
     }, 80);
   </script>
