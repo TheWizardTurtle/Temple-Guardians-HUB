@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Temple Guardians // TNJO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -24,25 +23,23 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 100vh;
       width: 100vw;
+      height: 100vh;
       z-index: -1;
-      background: transparent;
     }
 
     .loader {
       position: fixed;
       top: 0;
       left: 0;
-      height: 100vh;
       width: 100vw;
-      background-color: #0d0d0d;
-      z-index: 9999;
-      overflow: hidden;
+      height: 100vh;
+      background: #0d0d0d;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      z-index: 9999;
       transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
     }
 
@@ -52,33 +49,25 @@
       pointer-events: none;
     }
 
-    .flash-brief {
+    .corner-title,
+    .percent,
+    .jedi-logo,
+    .access-message,
+    .flash-brief,
+    .systems-text {
       position: absolute;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
       font-family: monospace;
-      color: #888;
-      font-size: 0.85rem;
-      text-align: center;
-      white-space: pre-line;
-      opacity: 0.6;
     }
 
     .corner-title {
-      position: absolute;
       top: 20px;
       left: 20px;
-      font-weight: bold;
       font-size: 1.5rem;
       color: #f6c93b;
-      letter-spacing: 2px;
       opacity: 0.3;
-      transition: opacity 2s ease-in-out;
     }
 
     .percent {
-      position: absolute;
       top: 20px;
       right: 20px;
       font-size: 1.5rem;
@@ -86,78 +75,76 @@
       font-weight: bold;
     }
 
+    .flash-brief {
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      color: #888;
+      white-space: pre-line;
+      opacity: 0.6;
+      text-align: center;
+    }
+
     .systems-text {
-      position: absolute;
       bottom: 10px;
       left: 20px;
       font-size: 0.8rem;
       color: #888;
-      font-family: monospace;
       opacity: 0.6;
     }
 
     .jedi-logo {
-      position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
       font-size: 1.2rem;
       color: #f6c93b;
       font-weight: bold;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .sentinel-insignia {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 200px;
-      height: auto;
       transform: translate(-50%, -50%);
+      width: 200px;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
-      z-index: 2;
     }
 
     .access-message {
-      position: absolute;
       top: 60%;
       left: 50%;
       transform: translateX(-50%);
       font-size: 1.5rem;
       color: #f6c93b;
-      opacity: 0;
-      transition: opacity 0.6s ease-in-out;
       font-weight: bold;
       text-align: center;
-      font-family: monospace;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
     }
 
     .code-columns {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       height: 100%;
       padding: 0 15vw;
-      position: relative;
     }
 
     .code-stream {
       width: 40%;
-      color: #f6c93b;
       font-size: 20px;
-      line-height: 1.6;
       font-family: monospace;
-      white-space: pre;
+      color: #f6c93b;
       opacity: 0.25;
-      height: 100vh;
-      overflow: hidden;
+      white-space: pre;
     }
 
     .left-stream {
       animation: scroll-down 10s linear forwards;
-      text-align: left;
     }
 
     .right-stream {
@@ -166,13 +153,13 @@
     }
 
     @keyframes scroll-down {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(0); }
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     @keyframes scroll-up {
-      0% { transform: translateY(100%); }
-      100% { transform: translateY(0); }
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
     }
 
     #main-content {
@@ -189,9 +176,9 @@
     header {
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       text-align: center;
       background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
     }
@@ -229,51 +216,138 @@
   </style>
 </head>
 <body>
+  <canvas id="stars"></canvas>
+
+  <div class="loader" id="loader">
+    <div class="corner-title">TEMPLE GUARDIANS</div>
+    <div class="percent" id="percent">0%</div>
+    <div class="flash-brief">// JEDI ARCHIVE TERMINAL\n// Clearance Level: SENTINEL\n// Welcome Commander...</div>
+    <div class="systems-text" id="systemsText"></div>
+    <img src="your-logo.png" class="sentinel-insignia" id="sentinelInsignia" />
+    <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
+    <div class="access-message" id="accessMessage">█ █ █ █ █ █ █ █</div>
+    <div class="code-columns">
+      <div class="code-stream left-stream" id="code-left"></div>
+      <div class="code-stream right-stream" id="code-right"></div>
+    </div>
+  </div>
+
   <div id="main-content">
-  <header data-aos="fade-in">
-    <h1>Temple Guardians // TNJO</h1>
-    <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
-  </header>
+    <header>
+      <h1>Temple Guardians // TNJO</h1>
+      <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
+    </header>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">Core Resources</h2>
-    <div class="card">
-      <h3>📘 Codex</h3>
-      <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
-    </div>
-    <div class="card">
-      <h3>📜 Training Programs</h3>
-      <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
-    </div>
-    <div class="card">
-      <h3>📈 Quota & Logs</h3>
-      <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
-    </div>
-    <div class="card">
-      <h3>🏛️ Academy</h3>
-      <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
-    </div>
-  </section>
+    <footer>
+      &copy; 2025 Temple Guardians — All Rights Reserved.
+    </footer>
+  </div>
 
-  <footer>
-    &copy; 2025 Temple Guardians — All Rights Reserved.
-  </footer>
-</div>
+  <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
+  <audio id="ambientSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_368f458c89.mp3" preload="auto" loop></audio>
 
   <script>
+    const starsCanvas = document.getElementById('stars');
+    const ctx = starsCanvas.getContext('2d');
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
+    const stars = Array.from({ length: 100 }, () => ({
+      x: Math.random() * starsCanvas.width,
+      y: Math.random() * starsCanvas.height,
+      r: Math.random() * 1.5 + 0.3
+    }));
+    function animateStars() {
+      ctx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+      ctx.fillStyle = 'white';
+      stars.forEach(star => {
+        ctx.globalAlpha = Math.random();
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    const percent = document.getElementById("percent");
+    const loader = document.getElementById("loader");
+    const mainContent = document.getElementById("main-content");
+    const codeLeft = document.getElementById("code-left");
+    const codeRight = document.getElementById("code-right");
+    const logo = document.getElementById("jediLogo");
+    const insignia = document.getElementById("sentinelInsignia");
+    const accessMessage = document.getElementById("accessMessage");
+    const systemsText = document.getElementById("systemsText");
+    const bootSound = document.getElementById("bootSound");
+    const ambientSound = document.getElementById("ambientSound");
+
+    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
+    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+
+    function randomText(len) {
+      return Array.from({ length: len }, () =>
+        galacticBase[Math.floor(Math.random() * galacticBase.length)]
+      ).join('');
+    }
+
+    function generateCodeLines(lines = 50) {
+      let left = "", right = "";
+      for (let i = 0; i < lines; i++) {
+        const len = Math.floor(Math.random() * 30 + 20);
+        const line = randomText(len);
+        left += line + "\n";
+        right = line + "\n" + right;
+      }
+      codeLeft.textContent = left;
+      codeRight.textContent = right;
+    }
+
+    function scrambleText(element, finalText, speed = 60) {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        element.textContent = finalText.split("").map((char, i) => {
+          if (i < iteration) return char;
+          return galacticBase[Math.floor(Math.random() * galacticBase.length)];
+        }).join("");
+        if (iteration >= finalText.length) clearInterval(interval);
+        iteration++;
+      }, speed);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      // ... existing logic
+      bootSound.volume = 0.8;
+      ambientSound.volume = 0.3;
+      bootSound.play().catch(() => {});
+      ambientSound.play().catch(() => {});
+
+      generateCodeLines();
+
       let count = 0;
       const interval = setInterval(() => {
         if (count >= 100) {
           clearInterval(interval);
           loader.classList.add("hidden");
           setTimeout(() => {
-            loader.style.display = 'none';
-            mainContent.classList.add('visible');
+            loader.style.display = "none";
+            mainContent.classList.add("visible");
           }, 1500);
         } else {
-          // ... rest of your loading logic
+          count++;
+          percent.textContent = `${count}%`;
+          if (count % 3 === 0) generateCodeLines();
+          if (count === 20) logo.style.opacity = 0.5;
+          if (count === 30) {
+            logo.style.opacity = 1;
+            insignia.style.opacity = 1;
+          }
+          if (count === 40) {
+            accessMessage.style.opacity = 1;
+            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+            scrambleText(accessMessage, phrase, 50);
+          }
+          if (count === 60) {
+            systemsText.textContent = "// Systems Online // Awaiting Entry";
+          }
         }
       }, 60);
     });
