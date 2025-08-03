@@ -3,108 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Temple Guardians Hub</title>
+  <title>Temple Guardians // TNJO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #111;
-      color: #eaeaea;
-      line-height: 1.6;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #f0f0f0;
+      overflow-x: hidden;
     }
 
     header {
-      background-color: #1a1a1a;
-      padding: 1.5rem;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      border-bottom: 2px solid #ffd700;
+      background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
     }
 
     header h1 {
-      font-size: 2rem;
-      color: #ffd700;
-      margin: 0;
+      font-size: 3.5rem;
+      color: #f6c93b;
+      margin-bottom: 1rem;
     }
 
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    header p {
+      font-size: 1.25rem;
+      color: #ccc;
+      max-width: 600px;
     }
 
     section {
-      background: #1c1c1c;
-      padding: 1.5rem;
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #f6c93b;
       margin-bottom: 2rem;
-      border-left: 4px solid #ffd700;
-      border-radius: 4px;
+      text-transform: uppercase;
     }
 
-    section h2 {
-      margin-top: 0;
-      color: #ffd700;
+    .card {
+      background: #1a1a1a;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid #f6c93b;
+      transition: transform 0.3s;
     }
 
-    ul {
-      padding-left: 1.5rem;
+    .card:hover {
+      transform: translateX(10px);
     }
 
-    a {
-      color: #89c9ff;
-      text-decoration: none;
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      color: #fff;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .card p {
+      color: #aaa;
+      line-height: 1.6;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #666;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Temple Guardians Central Hub</h1>
+  <header data-aos="fade-in">
+    <h1>Temple Guardians // TNJO</h1>
+    <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
   </header>
 
-  <div class="container">
-    <section>
-      <h2>📜 Codex & Regulations</h2>
-      <p>All rules, expectations, and regulations for Temple Guardians. Includes Law, Uniform, Patrol, and Duty behavior.</p>
-      <a href="#">View Codex</a>
-    </section>
-
-    <section>
-      <h2>🧭 Quota & Duty Requirements</h2>
-      <p>Understand your weekly responsibilities and quota based on your rank. Logs, hours, and expectations are explained here.</p>
-      <a href="#">View Quota Guidelines</a>
-    </section>
-
-    <section>
-      <h2>🏛️ Academy Path & Phase Guide</h2>
-      <p>Learn how the Academy structure works. All TG members STG+ are part of the Academy as trainers or mentors.</p>
-      <a href="#">Enter Academy Info</a>
-    </section>
-
-    <section>
-      <h2>⚔️ Combat & Doctrine Training</h2>
-      <p>Explore how we train, what to host, and how to improve law enforcement and combat skills.</p>
-      <a href="#">Training Materials</a>
-    </section>
-
-    <section>
-      <h2>🗂️ Archives & Documents</h2>
-      <p>A full collection of TG training documents, doctrine breakdowns, medallions, and more.</p>
-      <a href="#">Access Archive</a>
-    </section>
-  </div>
+  <section data-aos="fade-up">
+    <h2 class="section-title">Core Resources</h2>
+    <div class="card">
+      <h3>📘 Codex</h3>
+      <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
+    </div>
+    <div class="card">
+      <h3>📜 Training Programs</h3>
+      <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
+    </div>
+    <div class="card">
+      <h3>📈 Quota & Logs</h3>
+      <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
+    </div>
+    <div class="card">
+      <h3>🏛️ Academy</h3>
+      <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
+    </div>
+  </section>
 
   <footer>
-    Temple Guardians – “Order through presence. Strength through silence.”
+    &copy; 2025 Temple Guardians — All Rights Reserved.
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
