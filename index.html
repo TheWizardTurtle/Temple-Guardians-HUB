@@ -68,26 +68,27 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 120px;
+      width: 220px;
       height: auto;
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
       z-index: 1;
+      pointer-events: none;
     }
 
     .code-columns {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       height: 100%;
-      padding: 0 15vw;
+      padding: 0 20vw;
     }
 
     .code-stream {
       width: 30vw;
       color: #f6c93b;
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1.6;
       font-family: monospace;
       white-space: pre;
@@ -247,7 +248,7 @@
     const logo = document.getElementById("jediLogo");
     const cornerTitle = document.getElementById("corner-title");
     const insignia = document.getElementById("sentinelInsignia");
-    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᚱ᛽ᛱ᛹ᛉᚴᛌᛅᛊᛆ";
+    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᛵᛱ᛹ᛉ᛬ᛌᛅᛊᛂᛊᛆ";
 
     function randomText(len) {
       let out = "";
