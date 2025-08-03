@@ -36,7 +36,7 @@
       top: 20px;
       left: 20px;
       font-weight: bold;
-      font-size: 1.75rem;
+      font-size: 2rem;
       color: #f6c93b;
       letter-spacing: 2px;
     }
@@ -45,27 +45,27 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      font-size: 1.75rem;
+      font-size: 2rem;
       color: #f6c93b;
       font-weight: bold;
     }
 
     .code-columns {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       height: 100%;
-      padding: 0 15vw;
+      gap: 10vw;
     }
 
     .code-stream {
-      width: 20vw;
+      width: 30vw;
       color: #f6c93b;
-      font-size: 12px;
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.8;
       font-family: monospace;
       white-space: pre;
-      opacity: 0.15;
+      opacity: 0.2;
       height: 100vh;
       overflow: hidden;
     }
@@ -198,7 +198,7 @@
       <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
     </div>
     <div class="card">
-      <h3>🏛️ Academy</h3>
+      <h3>🏩 Academy</h3>
       <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
     </div>
   </section>
@@ -216,7 +216,7 @@
     const percent = document.getElementById("percent");
     const codeLeft = document.getElementById("code-left");
     const codeRight = document.getElementById("code-right");
-    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᚣᚷᚫᚱᚻᛳᛱᛉᛈᛄᛆᛅᛊ";
+    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᛣᚷᚫᚱ᛻ᛱ᛹ᛉᛄᛌᛅᛊ";
 
     function randomText(len) {
       let out = "";
@@ -230,7 +230,7 @@
       let left = "";
       let right = "";
       for (let i = 0; i < lines; i++) {
-        let len = Math.floor(Math.random() * 20 + 20);
+        let len = Math.floor(Math.random() * 30 + 30);
         const line = randomText(len);
         left += line + "\n";
         right = line + "\n" + right;
