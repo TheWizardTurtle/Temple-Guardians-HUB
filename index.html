@@ -47,10 +47,11 @@
     }
 
     .loader.hidden {
-      opacity: 0;
-      transform: scale(1.05) skewY(2deg);
-      pointer-events: none;
-    }
+  opacity: 0;
+  transform: scale(1.05) skewY(2deg);
+  pointer-events: none;
+  z-index: -999; /* Send it behind everything */
+}
 
     .flash-brief {
       position: absolute;
@@ -334,7 +335,10 @@
         if (count >= 100) {
           clearInterval(interval);
           loader.classList.add("hidden");
-          setTimeout(() => mainContent.style.display = 'block', 1000);
+setTimeout(() => {
+  loader.style.display = 'none';
+  mainContent.style.display = 'block';
+}, 1500); // Match transition time
         } else {
           count++;
           percent.textContent = `${count}%`;
