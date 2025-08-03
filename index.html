@@ -36,7 +36,7 @@
       top: 20px;
       left: 20px;
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       color: #f6c93b;
       letter-spacing: 2px;
     }
@@ -45,25 +45,24 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       color: #f6c93b;
       font-weight: bold;
     }
 
     .code-columns {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       height: 100%;
-      padding: 0 10vw;
-      gap: 10vw;
+      padding: 0 15vw;
     }
 
     .code-stream {
-      width: 300px;
+      width: 20vw;
       color: #f6c93b;
       font-size: 12px;
-      line-height: 1.4;
+      line-height: 1.6;
       font-family: monospace;
       white-space: pre;
       opacity: 0.15;
@@ -72,23 +71,23 @@
     }
 
     .left-stream {
-      animation: scroll-down 10s linear infinite;
+      animation: scroll-down 12s linear forwards;
       text-align: left;
     }
 
     .right-stream {
-      animation: scroll-up 10s linear infinite;
+      animation: scroll-up 12s linear forwards;
       text-align: right;
     }
 
     @keyframes scroll-down {
       0% { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
+      100% { transform: translateY(0); }
     }
 
     @keyframes scroll-up {
       0% { transform: translateY(100%); }
-      100% { transform: translateY(-100%); }
+      100% { transform: translateY(0); }
     }
 
     .loader.hidden {
@@ -227,11 +226,11 @@
       return out;
     }
 
-    function generateCodeLines(lines = 24) {
+    function generateCodeLines(lines = 50) {
       let left = "";
       let right = "";
       for (let i = 0; i < lines; i++) {
-        let len = Math.floor(Math.random() * 20 + 15);
+        let len = Math.floor(Math.random() * 20 + 20);
         const line = randomText(len);
         left += line + "\n";
         right = line + "\n" + right;
