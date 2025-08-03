@@ -216,7 +216,7 @@
     <div class="systems-text" id="systemsText"></div>
     <img src="sentinel-logo.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
     <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
-    <div class="access-message" id="accessMessage">█ █ █ █ █ █ █ █</div>
+    <div class="access-message" id="accessMessage"></div>
     <div class="code-columns">
       <div class="code-stream left-stream" id="code-left"></div>
       <div class="code-stream right-stream" id="code-right"></div>
@@ -251,10 +251,16 @@
     </footer>
   </div>
   <script>
+    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
     const codeLeft = document.getElementById("code-left");
     const codeRight = document.getElementById("code-right");
+    const loader = document.getElementById("loader");
+    const mainContent = document.getElementById("main-content");
+    const accessMessage = document.getElementById("accessMessage");
+    const logo = document.getElementById("jediLogo");
+    const insignia = document.getElementById("sentinelInsignia");
+
     function generateCodeLines(lines = 50) {
-      const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
       let left = "", right = "";
       for (let i = 0; i < lines; i++) {
         const len = Math.floor(Math.random() * 30 + 20);
@@ -265,9 +271,20 @@
       codeLeft.textContent = left;
       codeRight.textContent = right;
     }
+
+    function scrambleText(element, finalText, speed = 60) {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        element.textContent = finalText.split('').map((char, i) => {
+          if (i < iteration) return char;
+          return galacticBase[Math.floor(Math.random() * galacticBase.length)];
+        }).join('');
+        if (iteration >= finalText.length) clearInterval(interval);
+        iteration++;
+      }, speed);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      const loader = document.getElementById("loader");
-      const mainContent = document.getElementById("main-content");
       let count = 0;
       const interval = setInterval(() => {
         if (count >= 100) {
@@ -281,8 +298,17 @@
           count++;
           document.getElementById("percent").textContent = `${count}%`;
           if (count % 3 === 0) generateCodeLines();
+          if (count === 30) {
+            logo.style.opacity = 1;
+            insignia.style.opacity = 1;
+          }
+          if (count === 40) {
+            accessMessage.style.opacity = 1;
+            scrambleText(accessMessage, "ACCESS GRANTED");
+          }
         }
       }, 60);
+
       const canvas = document.getElementById('stars');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
