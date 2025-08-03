@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
-    /* All previous styles remain unchanged */
     * {
       margin: 0;
       padding: 0;
@@ -75,6 +74,19 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
       z-index: 2;
+    }
+
+    .access-message {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #f6c93b;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      font-weight: bold;
+      text-align: center;
     }
 
     .code-columns {
@@ -202,6 +214,7 @@
     <div class="percent" id="percent">0%</div>
     <img src="83a719476a3147f4def674dcab2593ae__1_-removebg-preview.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
     <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
+    <div class="access-message" id="accessMessage">ACCESS GRANTED</div>
     <div class="code-columns">
       <div class="code-stream left-stream" id="code-left"></div>
       <div class="code-stream right-stream" id="code-right"></div>
@@ -237,6 +250,8 @@
     &copy; 2025 Temple Guardians — All Rights Reserved.
   </footer>
 
+  <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -248,6 +263,8 @@
     const cornerTitle = document.getElementById("corner-title");
     const logo = document.getElementById("jediLogo");
     const insignia = document.getElementById("sentinelInsignia");
+    const accessMessage = document.getElementById("accessMessage");
+    const sound = document.getElementById("bootSound");
 
     const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
     let count = 0;
@@ -274,6 +291,7 @@
     }
 
     generateCodeLines();
+    sound.play();
 
     const interval = setInterval(() => {
       if (count >= 100) {
@@ -287,6 +305,7 @@
         if (count >= 50) logo.style.opacity = 0.5;
         if (count >= 80) logo.style.opacity = 1;
         if (count >= 90) insignia.style.opacity = 1;
+        if (count === 99) accessMessage.style.opacity = 1;
       }
     }, 80);
   </script>
