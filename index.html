@@ -48,6 +48,7 @@
       font-weight: 600;
       letter-spacing: 2px;
       color: #ffffff;
+      animation: pulse 3s ease-in-out infinite;
     }
 
     header {
@@ -60,6 +61,7 @@
       font-weight: 600;
       letter-spacing: 2px;
       margin-bottom: 1rem;
+      animation: pulse 3s ease-in-out infinite;
     }
 
     header p {
@@ -110,6 +112,18 @@
 
       header p {
         font-size: 1rem;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        text-shadow: 0 0 0 rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        text-shadow: 0 0 12px rgba(246, 201, 59, 0.6);
+      }
+      100% {
+        text-shadow: 0 0 0 rgba(255, 255, 255, 0.1);
       }
     }
   </style>
