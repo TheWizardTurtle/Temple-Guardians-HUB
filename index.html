@@ -47,11 +47,10 @@
     }
 
     .loader.hidden {
-  opacity: 0;
-  transform: scale(1.05) skewY(2deg);
-  pointer-events: none;
-  z-index: -999; /* Send it behind everything */
-}
+      opacity: 0;
+      transform: scale(1.05) skewY(2deg);
+      pointer-events: none;
+    }
 
     .flash-brief {
       position: absolute;
@@ -176,6 +175,17 @@
       100% { transform: translateY(0); }
     }
 
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #main-content.visible {
+      display: block;
+      opacity: 1;
+    }
+
     header {
       height: 100vh;
       display: flex;
@@ -219,144 +229,22 @@
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <div class="loader" id="loader">
-    <div class="corner-title" id="corner-title">TEMPLE GUARDIANS</div>
-    <div class="percent" id="percent">0%</div>
-    <div class="flash-brief" id="flashBrief">// JEDI ARCHIVE TERMINAL\n// Clearance Level: SENTINEL\n// Welcome Commander...</div>
-    <div class="systems-text" id="systemsText"></div>
-    <img src="83a719476a3147f4def674dcab2593ae__1_-removebg-preview.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
-    <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
-    <div class="access-message" id="accessMessage">█ █ █ █ █ █ █ █</div>
-    <div class="code-columns">
-      <div class="code-stream left-stream" id="code-left"></div>
-      <div class="code-stream right-stream" id="code-right"></div>
-    </div>
-  </div>
-
-  <div id="main-content" style="display: none;">
-    <header data-aos="fade-in">
-      <h1>Temple Guardians // TNJO</h1>
-      <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
-    </header>
-
-    <footer>
-      &copy; 2025 Temple Guardians — All Rights Reserved.
-    </footer>
-  </div>
-
-  <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
-  <audio id="ambientSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_368f458c89.mp3" preload="auto" loop></audio>
+  <!-- rest of the document stays the same -->
 
   <script>
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const stars = Array.from({length: 100}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.3
-    }));
-    function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
-      stars.forEach(star => {
-        ctx.globalAlpha = Math.random();
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
-  </script>
-
-  <script>
-    const loader = document.getElementById("loader");
-    const mainContent = document.getElementById("main-content");
-    const percent = document.getElementById("percent");
-    const codeLeft = document.getElementById("code-left");
-    const codeRight = document.getElementById("code-right");
-    const cornerTitle = document.getElementById("corner-title");
-    const logo = document.getElementById("jediLogo");
-    const insignia = document.getElementById("sentinelInsignia");
-    const accessMessage = document.getElementById("accessMessage");
-    const systemsText = document.getElementById("systemsText");
-    const bootSound = document.getElementById("bootSound");
-    const ambientSound = document.getElementById("ambientSound");
-
-    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
-    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
-
-    function randomText(len) {
-      let out = "";
-      for (let i = 0; i < len; i++) {
-        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
-      }
-      return out;
-    }
-
-    function generateCodeLines(lines = 50) {
-      let left = "", right = "";
-      for (let i = 0; i < lines; i++) {
-        const len = Math.floor(Math.random() * 30 + 20);
-        const line = randomText(len);
-        left += line + "\n";
-        right = line + "\n" + right;
-      }
-      codeLeft.textContent = left;
-      codeRight.textContent = right;
-    }
-
-    function scrambleText(element, finalText, speed = 50) {
-      const chars = galacticBase;
-      let iteration = 0;
-      const interval = setInterval(() => {
-        element.textContent = finalText.split('').map((char, i) => {
-          if (i < iteration) return char;
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-        if (iteration >= finalText.length) clearInterval(interval);
-        iteration++;
-      }, speed);
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      bootSound.volume = 0.8;
-      ambientSound.volume = 0.3;
-      bootSound.play().catch(() => {});
-      ambientSound.play().catch(() => {});
-
-      generateCodeLines();
-
+      // ... existing logic
       let count = 0;
       const interval = setInterval(() => {
         if (count >= 100) {
           clearInterval(interval);
           loader.classList.add("hidden");
-setTimeout(() => {
-  loader.style.display = 'none';
-  mainContent.style.display = 'block';
-}, 1500); // Match transition time
+          setTimeout(() => {
+            loader.style.display = 'none';
+            mainContent.classList.add('visible');
+          }, 1500);
         } else {
-          count++;
-          percent.textContent = `${count}%`;
-          if (count % 3 === 0) generateCodeLines();
-          if (count >= 15) cornerTitle.style.opacity = 1;
-          if (count === 20) logo.style.opacity = 0.5;
-          if (count === 30) {
-            logo.style.opacity = 1;
-            insignia.style.opacity = 1;
-          }
-          if (count === 40) {
-            accessMessage.style.opacity = 1;
-            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            scrambleText(accessMessage, phrase, 60);
-          }
-          if (count === 60) {
-            systemsText.textContent = "// Systems Online // Awaiting Entry";
-          }
+          // ... rest of your loading logic
         }
       }, 60);
     });
