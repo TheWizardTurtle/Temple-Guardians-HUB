@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
+    /* All previous styles remain unchanged */
     * {
       margin: 0;
       padding: 0;
@@ -196,4 +197,98 @@
   </style>
 </head>
 <body>
-  <!-- BODY UNCHANGED -->
+  <div class="loader" id="loader">
+    <div class="corner-title" id="corner-title">TEMPLE GUARDIANS</div>
+    <div class="percent" id="percent">0%</div>
+    <img src="83a719476a3147f4def674dcab2593ae__1_-removebg-preview.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
+    <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
+    <div class="code-columns">
+      <div class="code-stream left-stream" id="code-left"></div>
+      <div class="code-stream right-stream" id="code-right"></div>
+    </div>
+  </div>
+
+  <header data-aos="fade-in">
+    <h1>Temple Guardians // TNJO</h1>
+    <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
+  </header>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Core Resources</h2>
+    <div class="card">
+      <h3>📘 Codex</h3>
+      <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
+    </div>
+    <div class="card">
+      <h3>📜 Training Programs</h3>
+      <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
+    </div>
+    <div class="card">
+      <h3>📈 Quota & Logs</h3>
+      <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
+    </div>
+    <div class="card">
+      <h3>🏩 Academy</h3>
+      <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Temple Guardians — All Rights Reserved.
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    const loader = document.getElementById("loader");
+    const percent = document.getElementById("percent");
+    const codeLeft = document.getElementById("code-left");
+    const codeRight = document.getElementById("code-right");
+    const cornerTitle = document.getElementById("corner-title");
+    const logo = document.getElementById("jediLogo");
+    const insignia = document.getElementById("sentinelInsignia");
+
+    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+    let count = 0;
+
+    function randomText(len) {
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
+      }
+      return out;
+    }
+
+    function generateCodeLines(lines = 50) {
+      let left = "";
+      let right = "";
+      for (let i = 0; i < lines; i++) {
+        let len = Math.floor(Math.random() * 30 + 20);
+        const line = randomText(len);
+        left += line + "\n";
+        right = line + "\n" + right;
+      }
+      codeLeft.textContent = left;
+      codeRight.textContent = right;
+    }
+
+    generateCodeLines();
+
+    const interval = setInterval(() => {
+      if (count >= 100) {
+        clearInterval(interval);
+        loader.classList.add("hidden");
+      } else {
+        count++;
+        percent.textContent = `${count}%`;
+        if (count % 4 === 0) generateCodeLines();
+        if (count >= 20) cornerTitle.style.opacity = 1;
+        if (count >= 50) logo.style.opacity = 0.5;
+        if (count >= 80) logo.style.opacity = 1;
+        if (count >= 90) insignia.style.opacity = 1;
+      }
+    }, 80);
+  </script>
+</body>
+</html>
