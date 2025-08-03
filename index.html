@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Temple Guardians // TNJO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <title>Temple Guardians | TNJO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -14,111 +17,137 @@
     }
 
     body {
-      background-color: #0d0d0d;
       font-family: 'Space Grotesk', sans-serif;
-      color: #f0f0f0;
+      background-color: #0f0f11;
+      color: #f1f1f1;
       overflow-x: hidden;
     }
 
-    header {
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
       height: 100vh;
+      width: 100vw;
+      background-color: #0f0f11;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1s ease-out;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #f1f1f1;
+    }
+
+    header {
       text-align: center;
-      background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+      padding: 5rem 2rem 3rem;
     }
 
     header h1 {
-      font-size: 3.5rem;
-      color: #f6c93b;
+      font-size: 3rem;
+      font-weight: 600;
+      letter-spacing: 2px;
       margin-bottom: 1rem;
     }
 
     header p {
       font-size: 1.25rem;
       color: #ccc;
-      max-width: 600px;
     }
 
-    section {
-      padding: 6rem 2rem;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
       max-width: 1000px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      color: #f6c93b;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
+      margin: 0 auto;
     }
 
     .card {
-      background: #1a1a1a;
+      background-color: #1c1c20;
+      border: 1px solid #333;
       padding: 2rem;
-      margin-bottom: 2rem;
-      border-left: 4px solid #f6c93b;
-      transition: transform 0.3s;
+      border-radius: 1rem;
+      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .card:hover {
-      transform: translateX(10px);
+      transform: translateY(-5px);
     }
 
     .card h3 {
-      margin-bottom: 0.5rem;
       font-size: 1.5rem;
-      color: #fff;
+      margin-bottom: 1rem;
     }
 
     .card p {
+      font-size: 1rem;
       color: #aaa;
-      line-height: 1.6;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #666;
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.25rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header data-aos="fade-in">
-    <h1>Temple Guardians // TNJO</h1>
-    <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
+  <div class="loader" id="loader">
+    <h1>Temple Guardians</h1>
+  </div>
+
+  <header data-aos="fade-up">
+    <h1>TEMPLE GUARDIANS</h1>
+    <p>Order through presence. Strength through silence.</p>
   </header>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">Core Resources</h2>
-    <div class="card">
-      <h3>📘 Codex</h3>
-      <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
+  <section class="grid">
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <h3>Codex & Regulations</h3>
+      <p>The full rules, duties, ranks, and behavior expected of every Temple Guardian.</p>
     </div>
-    <div class="card">
-      <h3>📜 Training Programs</h3>
-      <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Training & Doctrine</h3>
+      <p>View all training formats, including combat, doctrine, anti-TK, and disciplinary protocols.</p>
     </div>
-    <div class="card">
-      <h3>📈 Quota & Logs</h3>
-      <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <h3>Quota System</h3>
+      <p>Understand weekly responsibilities, logging, and promotion expectations.</p>
     </div>
-    <div class="card">
-      <h3>🏛️ Academy</h3>
-      <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <h3>Academy Path</h3>
+      <p>The extended route into TG through instruction-based onboarding and mentorship.</p>
     </div>
   </section>
-
-  <footer>
-    &copy; 2025 Temple Guardians — All Rights Reserved.
-  </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
+
+    // Simulated load transition
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      setTimeout(() => loader.classList.add("hidden"), 800);
+    });
   </script>
 </body>
+
 </html>
