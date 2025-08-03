@@ -29,37 +29,51 @@
       background-color: #0d0d0d;
       z-index: 9999;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
     }
 
     .loader .code-stream {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #f6c93b;
-  font-size: 12px;
-  line-height: 1.5;
-  font-family: monospace;
-  white-space: pre;
-  opacity: 0.15;
-  animation: scroll 8s linear infinite;
-  pointer-events: none;
-  text-align: center;
-}
+      width: 40vw;
+      color: #f6c93b;
+      font-size: 12px;
+      line-height: 1.4;
+      font-family: monospace;
+      white-space: pre;
+      opacity: 0.15;
+    }
+
+    .left-stream {
+      animation: scroll-down 8s linear infinite;
+      text-align: left;
+    }
+
+    .right-stream {
+      animation: scroll-up 8s linear infinite;
+      text-align: right;
+    }
+
+    @keyframes scroll-down {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    @keyframes scroll-up {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
 
     .loader .corner-title {
       position: absolute;
       top: 20px;
       left: 20px;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       color: #f6c93b;
-      opacity: 0.95;
-      letter-spacing: 1px;
+      opacity: 1;
+      letter-spacing: 1.5px;
     }
 
     .loader .percent {
@@ -69,17 +83,12 @@
       font-size: 1.25rem;
       color: #f6c93b;
       font-weight: bold;
-      opacity: 0.95;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
+      opacity: 1;
     }
 
     .loader.hidden {
       transform: translateY(-100%);
-      transition: transform 1.2s ease-in-out;
+      transition: transform 1.5s ease-in-out;
     }
 
     header {
@@ -159,7 +168,8 @@
   <div class="loader" id="loader">
     <div class="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
-    <div class="code-stream" id="code-stream"></div>
+    <div class="code-stream left-stream" id="code-left"></div>
+    <div class="code-stream right-stream" id="code-right"></div>
   </div>
 
   <header data-aos="fade-in">
@@ -198,19 +208,23 @@
     let count = 0;
     const loader = document.getElementById("loader");
     const percent = document.getElementById("percent");
-    const codeStream = document.getElementById("code-stream");
-    const galacticBase = "ᚠᛁᛒᛞᛗᛇᛖᛚᛏᛋᛒᛖᛟᛛᛒᛇᛁᛈᛊᛏᛚᛒᚠᛄᛖᛁᛒ";
+    const codeLeft = document.getElementById("code-left");
+    const codeRight = document.getElementById("code-right");
+    const galacticBase = "ᚠᛁᛒᛏᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛕᚡᚷᚫᚱᚴᚻᚭᚤᛐᚪᚢ";
 
     function generateCodeLines(lines = 30) {
-      let content = "";
+      let left = "";
+      let right = "";
       for (let i = 0; i < lines; i++) {
         let line = "";
-        for (let j = 0; j < 80; j++) {
+        for (let j = 0; j < 35; j++) {
           line += galacticBase[Math.floor(Math.random() * galacticBase.length)];
         }
-        content += line + "\n";
+        left += line + "\n";
+        right = line + "\n" + right; // reverse stacking
       }
-      codeStream.textContent = content;
+      codeLeft.textContent = left;
+      codeRight.textContent = right;
     }
 
     generateCodeLines();
@@ -222,9 +236,9 @@
       } else {
         count++;
         percent.textContent = `${count}%`;
-        if (count % 5 === 0) generateCodeLines();
+        if (count % 4 === 0) generateCodeLines();
       }
-    }, 50);
+    }, 60);
   </script>
 </body>
 </html>
