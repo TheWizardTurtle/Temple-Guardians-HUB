@@ -18,7 +18,7 @@
 
     body {
       font-family: 'Space Grotesk', sans-serif;
-      background-color: #0f0f11;
+      background-color: #0e0e11;
       color: #f1f1f1;
       overflow-x: hidden;
     }
@@ -29,16 +29,17 @@
       left: 0;
       height: 100vh;
       width: 100vw;
-      background-color: #0f0f11;
+      background-color: #0e0e11;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      transition: opacity 1s ease-out;
+      transition: opacity 1s ease-out, filter 1s ease-out;
     }
 
     .loader.hidden {
       opacity: 0;
+      filter: blur(5px);
       pointer-events: none;
     }
 
@@ -46,7 +47,7 @@
       font-size: 3rem;
       font-weight: 600;
       letter-spacing: 2px;
-      color: #f1f1f1;
+      color: #ffffff;
     }
 
     header {
@@ -63,7 +64,7 @@
 
     header p {
       font-size: 1.25rem;
-      color: #ccc;
+      color: #b3b3b3;
     }
 
     .grid {
@@ -72,36 +73,41 @@
       gap: 2rem;
       padding: 2rem;
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 0 auto 4rem;
     }
 
     .card {
-      background-color: #1c1c20;
-      border: 1px solid #333;
+      background: radial-gradient(circle at top left, #1a1a1d, #121215);
+      border: 1px solid #2a2a2d;
       padding: 2rem;
-      border-radius: 1rem;
-      transition: transform 0.3s ease;
+      border-radius: 1.25rem;
+      transition: all 0.3s ease;
       cursor: pointer;
+      box-shadow: 0 0 0 transparent;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+      border-color: #3a3a3d;
     }
 
     .card h3 {
       font-size: 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      color: #f9f9f9;
     }
 
     .card p {
       font-size: 1rem;
-      color: #aaa;
+      color: #9c9c9c;
     }
 
     @media (max-width: 600px) {
       header h1 {
         font-size: 2.25rem;
       }
+
       header p {
         font-size: 1rem;
       }
@@ -140,12 +146,11 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init({ duration: 1000 });
 
-    // Simulated load transition
     window.addEventListener("load", () => {
       const loader = document.getElementById("loader");
-      setTimeout(() => loader.classList.add("hidden"), 800);
+      setTimeout(() => loader.classList.add("hidden"), 1000);
     });
   </script>
 </body>
