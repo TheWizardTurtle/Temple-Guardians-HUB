@@ -288,13 +288,13 @@
       codeRight.textContent = right;
     }
 
-    function scrambleText(element, finalText, speed = 30) {
+    function scrambleText(element, finalText, speed = 40, delayIterations = 10) {
       let iteration = 0;
       const scrambleInterval = setInterval(() => {
         element.textContent = finalText.split('').map((char, i) => {
-          return i < iteration ? char : galacticBase[Math.floor(Math.random() * galacticBase.length)];
+          return i < iteration - delayIterations ? char : galacticBase[Math.floor(Math.random() * galacticBase.length)];
         }).join('');
-        if (iteration >= finalText.length) clearInterval(scrambleInterval);
+        if (iteration - delayIterations >= finalText.length) clearInterval(scrambleInterval);
         iteration++;
       }, speed);
     }
@@ -314,8 +314,8 @@
 
       setTimeout(() => {
         accessMessage.style.opacity = 1;
-        scrambleText(accessMessage, phrases[Math.floor(Math.random() * phrases.length)], 40);
-      }, 2200);
+        scrambleText(accessMessage, phrases[Math.floor(Math.random() * phrases.length)], 40, 10);
+      }, 1800);
 
       const interval = setInterval(() => {
         if (count >= 100) {
