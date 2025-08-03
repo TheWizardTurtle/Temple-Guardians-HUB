@@ -20,6 +20,16 @@
       overflow-x: hidden;
     }
 
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
+      background: transparent;
+    }
+
     .loader {
       position: fixed;
       top: 0;
@@ -39,6 +49,19 @@
     .loader.hidden {
       opacity: 0;
       transform: scale(1.05) skewY(2deg);
+    }
+
+    .flash-brief {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: monospace;
+      color: #888;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: pre-line;
+      opacity: 0.6;
     }
 
     .corner-title {
@@ -194,9 +217,11 @@
   </style>
 </head>
 <body>
+  <canvas id="stars"></canvas>
   <div class="loader" id="loader">
     <div class="corner-title" id="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
+    <div class="flash-brief" id="flashBrief">// JEDI ARCHIVE TERMINAL\n// Clearance Level: SENTINEL\n// Welcome Commander...</div>
     <div class="systems-text" id="systemsText"></div>
     <img src="83a719476a3147f4def674dcab2593ae__1_-removebg-preview.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
     <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
@@ -219,99 +244,28 @@
   <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
   <audio id="ambientSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_368f458c89.mp3" preload="auto" loop></audio>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-
-    const loader = document.getElementById("loader");
-    const percent = document.getElementById("percent");
-    const codeLeft = document.getElementById("code-left");
-    const codeRight = document.getElementById("code-right");
-    const cornerTitle = document.getElementById("corner-title");
-    const logo = document.getElementById("jediLogo");
-    const insignia = document.getElementById("sentinelInsignia");
-    const accessMessage = document.getElementById("accessMessage");
-    const sound = document.getElementById("bootSound");
-    const ambient = document.getElementById("ambientSound");
-    const systemsText = document.getElementById("systemsText");
-
-    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
-    const systemMsgs = [
-      "Initializing command relay...",
-      "Authenticating Temple ID...",
-      "Decrypting holocron protocol...",
-      "Link established with archives..."
-    ];
-    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
-    let count = 0;
-    let sysMsgIndex = 0;
-
-    function randomText(len) {
-      return Array.from({ length: len }, () => galacticBase[Math.floor(Math.random() * galacticBase.length)]).join('');
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const stars = Array.from({length: 100}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3
+    }));
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      stars.forEach(star => {
+        ctx.globalAlpha = Math.random();
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
     }
-
-    function generateCodeLines(lines = 50) {
-      let left = "";
-      let right = "";
-      for (let i = 0; i < lines; i++) {
-        const len = Math.floor(Math.random() * 30 + 20);
-        const line = randomText(len);
-        left += line + "\n";
-        right = line + "\n" + right;
-      }
-      codeLeft.textContent = left;
-      codeRight.textContent = right;
-    }
-
-    function scrambleText(element, finalText, speed = 40, delayIterations = 10) {
-      let iteration = 0;
-      const scrambleInterval = setInterval(() => {
-        element.textContent = finalText.split('').map((char, i) => {
-          return i < iteration - delayIterations ? char : galacticBase[Math.floor(Math.random() * galacticBase.length)];
-        }).join('');
-        if (iteration - delayIterations >= finalText.length) clearInterval(scrambleInterval);
-        iteration++;
-      }, speed);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      sound.play();
-      ambient.volume = 0.2;
-      ambient.play();
-      generateCodeLines();
-
-      setTimeout(() => {
-        logo.style.opacity = 0.5;
-      }, 1500);
-
-      setTimeout(() => {
-        logo.style.opacity = 1;
-        insignia.style.opacity = 1;
-      }, 2800);
-
-      setTimeout(() => {
-        accessMessage.style.opacity = 1;
-        scrambleText(accessMessage, phrases[Math.floor(Math.random() * phrases.length)], 40, 10);
-      }, 1800);
-
-      setInterval(() => {
-        if (sysMsgIndex < systemMsgs.length) {
-          systemsText.textContent = systemMsgs[sysMsgIndex++];
-        }
-      }, 1000);
-
-      const interval = setInterval(() => {
-        if (count >= 100) {
-          clearInterval(interval);
-          loader.classList.add("hidden");
-        } else {
-          count++;
-          percent.textContent = `${count}%`;
-          if (count % 3 === 0) generateCodeLines();
-          if (count >= 20) cornerTitle.style.opacity = 1;
-        }
-      }, 60);
-    });
+    animateStars();
   </script>
 </body>
 </html>
