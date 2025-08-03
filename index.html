@@ -267,22 +267,19 @@
     const accessMessage = document.getElementById("accessMessage");
     const sound = document.getElementById("bootSound");
 
+    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
     const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
     let count = 0;
 
     function randomText(len) {
-      let out = "";
-      for (let i = 0; i < len; i++) {
-        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
-      }
-      return out;
+      return Array.from({ length: len }, () => galacticBase[Math.floor(Math.random() * galacticBase.length)]).join('');
     }
 
     function generateCodeLines(lines = 50) {
       let left = "";
       let right = "";
       for (let i = 0; i < lines; i++) {
-        let len = Math.floor(Math.random() * 30 + 20);
+        const len = Math.floor(Math.random() * 30 + 20);
         const line = randomText(len);
         left += line + "\n";
         right = line + "\n" + right;
@@ -292,67 +289,45 @@
     }
 
     function scrambleText(element, finalText, speed = 30) {
-      const chars = galacticBase;
       let iteration = 0;
       const scrambleInterval = setInterval(() => {
         element.textContent = finalText.split('').map((char, i) => {
-          if (i < iteration) return char;
-          return chars[Math.floor(Math.random() * chars.length)];
+          return i < iteration ? char : galacticBase[Math.floor(Math.random() * galacticBase.length)];
         }).join('');
-        if (iteration >= finalText.length) {
-          clearInterval(scrambleInterval);
-        }
-        iteration++;
-      }, speed);
-    }
-
-    generateCodeLines();
-    sound.play();
-
-    const interval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(interval);
-        loader.classList.add("hidden");
-      } else {
-        count++;
-        percent.textContent = `${count}%`;
-        if (count % 4 === 0) generateCodeLines();
-        if (count >= 20) cornerTitle.style.opacity = 1;
-        if (count >= 40) logo.style.opacity = 0.5;
-        if (count >= 60) insignia.style.opacity = 0.3;
-        if (count >= 70) logo.style.opacity = 1;
-        if (count >= 80) insignia.style.opacity = 1;
-        if (count === 95) {
-          accessMessage.style.opacity = 1;
-          scrambleText(accessMessage, "ACCESS GRANTED");
-        }
-      }
-    }, 70);
-  </script>
-</body>
-
-  <script>
-    function scrambleText(element, finalText, speed = 30, delay = 100) {
-      const chars = 'ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ';
-      let iteration = 0;
-      const scrambleInterval = setInterval(() => {
-        element.textContent = finalText.split('').map((char, i) => {
-          if (i < iteration) return char;
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-        if (iteration >= finalText.length) {
-          clearInterval(scrambleInterval);
-        }
+        if (iteration >= finalText.length) clearInterval(scrambleInterval);
         iteration++;
       }, speed);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      const message = document.getElementById("accessMessage");
+      sound.play();
+      generateCodeLines();
+
       setTimeout(() => {
-        message.style.opacity = 1;
-        scrambleText(message, "ACCESS GRANTED");
-      }, 7000);
+        logo.style.opacity = 0.5;
+      }, 1500);
+
+      setTimeout(() => {
+        logo.style.opacity = 1;
+        insignia.style.opacity = 1;
+      }, 2800);
+
+      setTimeout(() => {
+        accessMessage.style.opacity = 1;
+        scrambleText(accessMessage, phrases[Math.floor(Math.random() * phrases.length)], 40);
+      }, 2200);
+
+      const interval = setInterval(() => {
+        if (count >= 100) {
+          clearInterval(interval);
+          loader.classList.add("hidden");
+        } else {
+          count++;
+          percent.textContent = `${count}%`;
+          if (count % 3 === 0) generateCodeLines();
+          if (count >= 20) cornerTitle.style.opacity = 1;
+        }
+      }, 60);
     });
   </script>
 </body>
