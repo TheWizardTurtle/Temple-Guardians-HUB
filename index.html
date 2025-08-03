@@ -4,61 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Temple Guardians // TNJO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background-color: #0d0d0d;
       font-family: 'Space Grotesk', sans-serif;
       color: #f0f0f0;
       overflow-x: hidden;
     }
-
     #stars {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
       height: 100vh;
+      width: 100vw;
       z-index: -1;
     }
-
     .loader {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
       height: 100vh;
-      background: #0d0d0d;
+      width: 100vw;
+      background-color: #0d0d0d;
+      z-index: 9999;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
+      flex-direction: column;
       transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
     }
-
     .loader.hidden {
       opacity: 0;
       transform: scale(1.05) skewY(2deg);
       pointer-events: none;
     }
-
-    .corner-title,
-    .percent,
-    .jedi-logo,
-    .access-message,
-    .flash-brief,
-    .systems-text {
+    .corner-title, .percent, .jedi-logo, .access-message, .flash-brief, .systems-text {
       position: absolute;
       font-family: monospace;
     }
-
     .corner-title {
       top: 20px;
       left: 20px;
@@ -66,7 +51,6 @@
       color: #f6c93b;
       opacity: 0.3;
     }
-
     .percent {
       top: 20px;
       right: 20px;
@@ -74,7 +58,6 @@
       color: #f6c93b;
       font-weight: bold;
     }
-
     .flash-brief {
       top: 80px;
       left: 50%;
@@ -85,7 +68,6 @@
       opacity: 0.6;
       text-align: center;
     }
-
     .systems-text {
       bottom: 10px;
       left: 20px;
@@ -93,7 +75,6 @@
       color: #888;
       opacity: 0.6;
     }
-
     .jedi-logo {
       bottom: 20px;
       left: 50%;
@@ -104,17 +85,17 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
-
     .sentinel-insignia {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 200px;
+      height: auto;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
+      z-index: 2;
     }
-
     .access-message {
       top: 60%;
       left: 50%;
@@ -126,14 +107,12 @@
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
     }
-
     .code-columns {
       display: flex;
       justify-content: space-between;
       height: 100%;
       padding: 0 15vw;
     }
-
     .code-stream {
       width: 40%;
       font-size: 20px;
@@ -142,47 +121,39 @@
       opacity: 0.25;
       white-space: pre;
     }
-
     .left-stream {
       animation: scroll-down 10s linear forwards;
     }
-
     .right-stream {
       animation: scroll-up 10s linear forwards;
       text-align: right;
     }
-
     @keyframes scroll-down {
       from { transform: translateY(-100%); }
       to { transform: translateY(0); }
     }
-
     @keyframes scroll-up {
       from { transform: translateY(100%); }
       to { transform: translateY(0); }
     }
-
     #main-content {
       display: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
     #main-content.visible {
       display: block;
       opacity: 1;
     }
-
     header {
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       text-align: center;
-      background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+      background: transparent;
     }
-
     header h1 {
       font-size: 3.5rem;
       color: #f6c93b;
@@ -190,24 +161,45 @@
       animation: pulse 3s ease-in-out infinite;
       transition: text-shadow 0.3s ease-in-out;
     }
-
     header h1:hover {
       text-shadow: 0 0 20px rgba(246, 201, 59, 0.8);
     }
-
     header p {
       font-size: 1.25rem;
       color: #ccc;
       max-width: 600px;
     }
-
+    section {
+      padding: 4rem 2rem;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #f6c93b;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: #1a1a1a;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      max-width: 600px;
+      border-left: 4px solid #f6c93b;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.85rem;
       color: #666;
     }
-
     @keyframes pulse {
       0% { text-shadow: 0 0 0 rgba(255, 255, 255, 0.1); }
       50% { text-shadow: 0 0 12px rgba(246, 201, 59, 0.6); }
@@ -223,7 +215,7 @@
     <div class="percent" id="percent">0%</div>
     <div class="flash-brief">// JEDI ARCHIVE TERMINAL\n// Clearance Level: SENTINEL\n// Welcome Commander...</div>
     <div class="systems-text" id="systemsText"></div>
-    <img src="your-logo.png" class="sentinel-insignia" id="sentinelInsignia" />
+    <img src="sentinel-logo.png" class="sentinel-insignia" id="sentinelInsignia" alt="Sentinel Logo">
     <div class="jedi-logo" id="jediLogo">JEDI SENTINELS</div>
     <div class="access-message" id="accessMessage">█ █ █ █ █ █ █ █</div>
     <div class="code-columns">
@@ -238,118 +230,71 @@
       <p>Order through presence. Strength through silence. Explore our discipline, doctrine, and duties.</p>
     </header>
 
+    <section>
+      <h2 class="section-title">Core Resources</h2>
+      <div class="card">
+        <h3>📘 Codex</h3>
+        <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
+      </div>
+      <div class="card">
+        <h3>📜 Training Programs</h3>
+        <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
+      </div>
+      <div class="card">
+        <h3>📈 Quota & Logs</h3>
+        <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
+      </div>
+      <div class="card">
+        <h3>🏛️ Academy</h3>
+        <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
+      </div>
+    </section>
+
     <footer>
       &copy; 2025 Temple Guardians — All Rights Reserved.
     </footer>
   </div>
 
-  <audio id="bootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f1dd57b74.mp3" preload="auto"></audio>
-  <audio id="ambientSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_368f458c89.mp3" preload="auto" loop></audio>
-
   <script>
-    const starsCanvas = document.getElementById('stars');
-    const ctx = starsCanvas.getContext('2d');
-    starsCanvas.width = window.innerWidth;
-    starsCanvas.height = window.innerHeight;
-    const stars = Array.from({ length: 100 }, () => ({
-      x: Math.random() * starsCanvas.width,
-      y: Math.random() * starsCanvas.height,
-      r: Math.random() * 1.5 + 0.3
-    }));
-    function animateStars() {
-      ctx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
-      ctx.fillStyle = 'white';
-      stars.forEach(star => {
-        ctx.globalAlpha = Math.random();
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
-
-    const percent = document.getElementById("percent");
-    const loader = document.getElementById("loader");
-    const mainContent = document.getElementById("main-content");
-    const codeLeft = document.getElementById("code-left");
-    const codeRight = document.getElementById("code-right");
-    const logo = document.getElementById("jediLogo");
-    const insignia = document.getElementById("sentinelInsignia");
-    const accessMessage = document.getElementById("accessMessage");
-    const systemsText = document.getElementById("systemsText");
-    const bootSound = document.getElementById("bootSound");
-    const ambientSound = document.getElementById("ambientSound");
-
-    const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
-    const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
-
-    function randomText(len) {
-      return Array.from({ length: len }, () =>
-        galacticBase[Math.floor(Math.random() * galacticBase.length)]
-      ).join('');
-    }
-
-    function generateCodeLines(lines = 50) {
-      let left = "", right = "";
-      for (let i = 0; i < lines; i++) {
-        const len = Math.floor(Math.random() * 30 + 20);
-        const line = randomText(len);
-        left += line + "\n";
-        right = line + "\n" + right;
-      }
-      codeLeft.textContent = left;
-      codeRight.textContent = right;
-    }
-
-    function scrambleText(element, finalText, speed = 60) {
-      let iteration = 0;
-      const interval = setInterval(() => {
-        element.textContent = finalText.split("").map((char, i) => {
-          if (i < iteration) return char;
-          return galacticBase[Math.floor(Math.random() * galacticBase.length)];
-        }).join("");
-        if (iteration >= finalText.length) clearInterval(interval);
-        iteration++;
-      }, speed);
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      bootSound.volume = 0.8;
-      ambientSound.volume = 0.3;
-      bootSound.play().catch(() => {});
-      ambientSound.play().catch(() => {});
-
-      generateCodeLines();
-
+      const loader = document.getElementById("loader");
+      const mainContent = document.getElementById("main-content");
       let count = 0;
       const interval = setInterval(() => {
         if (count >= 100) {
           clearInterval(interval);
           loader.classList.add("hidden");
           setTimeout(() => {
-            loader.style.display = "none";
-            mainContent.classList.add("visible");
+            loader.style.display = 'none';
+            mainContent.classList.add('visible');
           }, 1500);
         } else {
           count++;
-          percent.textContent = `${count}%`;
-          if (count % 3 === 0) generateCodeLines();
-          if (count === 20) logo.style.opacity = 0.5;
-          if (count === 30) {
-            logo.style.opacity = 1;
-            insignia.style.opacity = 1;
-          }
-          if (count === 40) {
-            accessMessage.style.opacity = 1;
-            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            scrambleText(accessMessage, phrase, 50);
-          }
-          if (count === 60) {
-            systemsText.textContent = "// Systems Online // Awaiting Entry";
-          }
+          document.getElementById("percent").textContent = `${count}%`;
         }
       }, 60);
+
+      const canvas = document.getElementById('stars');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const stars = Array.from({length: 100}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.3
+      }));
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(star => {
+          ctx.globalAlpha = Math.random();
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
     });
   </script>
 </body>
