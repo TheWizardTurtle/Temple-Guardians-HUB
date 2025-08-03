@@ -266,6 +266,89 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
-  </script>
+  </script><script>
+  const loader = document.getElementById("loader");
+  const percent = document.getElementById("percent");
+  const codeLeft = document.getElementById("code-left");
+  const codeRight = document.getElementById("code-right");
+  const cornerTitle = document.getElementById("corner-title");
+  const logo = document.getElementById("jediLogo");
+  const insignia = document.getElementById("sentinelInsignia");
+  const accessMessage = document.getElementById("accessMessage");
+  const systemsText = document.getElementById("systemsText");
+  const bootSound = document.getElementById("bootSound");
+  const ambientSound = document.getElementById("ambientSound");
+
+  const phrases = ["ACCESS GRANTED", "TRANSMISSION RECEIVED", "ENTRY VALIDATED"];
+  const galacticBase = "ᚠᛁᛒᛂᛖᛇᛐᛚᛞᛋᛘᛝᛔᛜᛣᛓᛟᛛᛎᛏᛑᛍᛈᛙᛃᛌᛉᛗᛊᛕᛆ";
+
+  function randomText(len) {
+    let out = "";
+    for (let i = 0; i < len; i++) {
+      out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
+    }
+    return out;
+  }
+
+  function generateCodeLines(lines = 50) {
+    let left = "", right = "";
+    for (let i = 0; i < lines; i++) {
+      const len = Math.floor(Math.random() * 30 + 20);
+      const line = randomText(len);
+      left += line + "\n";
+      right = line + "\n" + right;
+    }
+    codeLeft.textContent = left;
+    codeRight.textContent = right;
+  }
+
+  function scrambleText(element, finalText, speed = 50, delayBeforeReveal = 800) {
+    const chars = galacticBase;
+    let iteration = 0;
+    const interval = setInterval(() => {
+      element.textContent = finalText.split('').map((char, i) => {
+        if (i < iteration) return char;
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      if (iteration >= finalText.length) clearInterval(interval);
+      iteration++;
+    }, speed);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    bootSound.volume = 0.8;
+    ambientSound.volume = 0.3;
+    bootSound.play().catch(() => {});
+    ambientSound.play().catch(() => {});
+
+    generateCodeLines();
+
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count >= 100) {
+        clearInterval(interval);
+        loader.classList.add("hidden");
+      } else {
+        count++;
+        percent.textContent = `${count}%`;
+        if (count % 3 === 0) generateCodeLines();
+        if (count >= 15) cornerTitle.style.opacity = 1;
+        if (count === 20) logo.style.opacity = 0.5;
+        if (count === 30) {
+          logo.style.opacity = 1;
+          insignia.style.opacity = 1;
+        }
+        if (count === 40) {
+          accessMessage.style.opacity = 1;
+          const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+          scrambleText(accessMessage, phrase, 60, 1200);
+        }
+        if (count === 60) {
+          systemsText.textContent = "// Systems Online // Awaiting Entry";
+        }
+      }
+    }, 60);
+  });
+</script>
 </body>
 </html>
