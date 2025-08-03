@@ -29,29 +29,55 @@
       background-color: #0d0d0d;
       z-index: 9999;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5vw;
     }
 
-    .loader .code-stream {
-      width: 40vw;
+    .loader .corner-title {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #f6c93b;
+      letter-spacing: 2px;
+    }
+
+    .loader .percent {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: #f6c93b;
+      font-weight: bold;
+    }
+
+    .code-columns {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 0 10vw;
+      gap: 10vw;
+    }
+
+    .code-stream {
+      width: 300px;
       color: #f6c93b;
       font-size: 12px;
       line-height: 1.4;
       font-family: monospace;
       white-space: pre;
       opacity: 0.15;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .left-stream {
-      animation: scroll-down 8s linear infinite;
+      animation: scroll-down 10s linear infinite;
       text-align: left;
     }
 
     .right-stream {
-      animation: scroll-up 8s linear infinite;
+      animation: scroll-up 10s linear infinite;
       text-align: right;
     }
 
@@ -63,27 +89,6 @@
     @keyframes scroll-up {
       0% { transform: translateY(100%); }
       100% { transform: translateY(-100%); }
-    }
-
-    .loader .corner-title {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-weight: bold;
-      font-size: 1.25rem;
-      color: #f6c93b;
-      opacity: 1;
-      letter-spacing: 1.5px;
-    }
-
-    .loader .percent {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 1.25rem;
-      color: #f6c93b;
-      font-weight: bold;
-      opacity: 1;
     }
 
     .loader.hidden {
@@ -168,8 +173,10 @@
   <div class="loader" id="loader">
     <div class="corner-title">TEMPLE GUARDIANS</div>
     <div class="percent" id="percent">0%</div>
-    <div class="code-stream left-stream" id="code-left"></div>
-    <div class="code-stream right-stream" id="code-right"></div>
+    <div class="code-columns">
+      <div class="code-stream left-stream" id="code-left"></div>
+      <div class="code-stream right-stream" id="code-right"></div>
+    </div>
   </div>
 
   <header data-aos="fade-in">
@@ -210,18 +217,24 @@
     const percent = document.getElementById("percent");
     const codeLeft = document.getElementById("code-left");
     const codeRight = document.getElementById("code-right");
-    const galacticBase = "ᚠᛁᛒᛏᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛕᚡᚷᚫᚱᚴᚻᚭᚤᛐᚪᚢ";
+    const galacticBase = "ᚠᛁᛒᛓᛗᛇᛖᛚᛟᛋᛘᛞᛛᛜᛝᛍᚣᚷᚫᚱᚻᛳᛱᛉᛈᛄᛆᛅᛊ";
 
-    function generateCodeLines(lines = 30) {
+    function randomText(len) {
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        out += galacticBase[Math.floor(Math.random() * galacticBase.length)];
+      }
+      return out;
+    }
+
+    function generateCodeLines(lines = 24) {
       let left = "";
       let right = "";
       for (let i = 0; i < lines; i++) {
-        let line = "";
-        for (let j = 0; j < 35; j++) {
-          line += galacticBase[Math.floor(Math.random() * galacticBase.length)];
-        }
+        let len = Math.floor(Math.random() * 20 + 15);
+        const line = randomText(len);
         left += line + "\n";
-        right = line + "\n" + right; // reverse stacking
+        right = line + "\n" + right;
       }
       codeLeft.textContent = left;
       codeRight.textContent = right;
@@ -238,7 +251,7 @@
         percent.textContent = `${count}%`;
         if (count % 4 === 0) generateCodeLines();
       }
-    }, 60);
+    }, 80);
   </script>
 </body>
 </html>
