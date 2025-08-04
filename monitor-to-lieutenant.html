@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitor ➤ Lieutenant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #f0f0f0;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #1a1a1a;
+      padding: 2rem;
+      border-left: 4px solid #f6c93b;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(246, 201, 59, 0.05);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #f6c93b;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: #bbb;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      background: #111;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .requirement:hover {
+      background: #181818;
+    }
+
+    .requirement input[type="checkbox"] {
+      margin-right: 1rem;
+      transform: scale(1.3);
+      accent-color: #f6c93b;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #eee;
+      cursor: pointer;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #f6c93b;
+      color: #0d0d0d;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .back-button:hover {
+      background-color: #ffd84b;
+    }
+
+    @media (max-width: 600px) {
+      .requirement {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .requirement input {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Monitor ➤ Lieutenant</h1>
+    <p class="subtitle">Complete the following requirements to advance to Lieutenant. Progress is saved locally in your browser.</p>
+
+    <div class="requirement"><input type="checkbox" id="r1"><label for="r1">Host at least 4 of each training</label></div>
+    <div class="requirement"><input type="checkbox" id="r2"><label for="r2">Be a Sub-Division Lead or Head Instructor in Academy</label></div>
+    <div class="requirement"><input type="checkbox" id="r3"><label for="r3">Pass HiCOMM vote</label></div>
+    <div class="requirement"><input type="checkbox" id="r4"><label for="r4">Hold Monitor rank for at least 2 weeks</label></div>
+
+    <a href="progresstrackerhub.html" class="back-button">← Back to Tracker Hub</a>
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((box, index) => {
+      const saved = localStorage.getItem(`monitor-lieutenant-${index}`);
+      if (saved === 'true') box.checked = true;
+
+      box.addEventListener('change', () => {
+        localStorage.setItem(`monitor-lieutenant-${index}`, box.checked);
+      });
+    });
+  </script>
+</body>
+</html>
