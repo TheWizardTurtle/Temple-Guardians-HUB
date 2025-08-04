@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temple Guardians // Master Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #f0f0f0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #f6c93b;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .tracker-row {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      border-left: 4px solid #f6c93b;
+      border-radius: 8px;
+      max-width: 800px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease;
+    }
+    .tracker-row:hover {
+      box-shadow: 0 4px 10px rgba(246, 201, 59, 0.15);
+    }
+    .rank-label a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .progress-bar {
+      background-color: #333;
+      border-radius: 4px;
+      overflow: hidden;
+      width: 45%;
+      height: 1rem;
+    }
+    .progress-fill {
+      background-color: #f6c93b;
+      height: 100%;
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 3rem;
+      color: #f6c93b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Master Progress Tracker</h1>
+
+  <div class="tracker-row">
+    <div class="rank-label"><a href="pledge-to-student.html">Pledge ➤ Student</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-pledge"></div></div>
+  </div>
+  <div class="tracker-row">
+    <div class="rank-label"><a href="student-to-prospect.html">Student ➤ Prospect</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-student"></div></div>
+  </div>
+  <div class="tracker-row">
+    <div class="rank-label"><a href="prospect-to-guardian.html">Prospect ➤ Temple Guardian</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-prospect"></div></div>
+  </div>
+  <div class="tracker-row">
+    <div class="rank-label"><a href="guardian-to-senior.html">Temple Guardian ➤ Senior</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-guardian"></div></div>
+  </div>
+  <div class="tracker-row">
+    <div class="rank-label"><a href="senior-to-monitor.html">Senior ➤ Monitor</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-senior"></div></div>
+  </div>
+  <div class="tracker-row">
+    <div class="rank-label"><a href="monitor-to-lieutenant.html">Monitor ➤ Lieutenant</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-monitor"></div></div>
+  </div>
+
+  <a href="progresstrackerhub.html" class="back-link">← Back to Tracker Hub</a>
+
+  <script>
+    function calculateProgress(storageKey) {
+      const data = JSON.parse(localStorage.getItem(storageKey)) || {};
+      const total = Object.keys(data).length;
+      const completed = Object.values(data).filter(Boolean).length;
+      return total === 0 ? 0 : Math.round((completed / total) * 100);
+    }
+
+    const mappings = {
+      "progress-pledge": "pledgeToStudent",
+      "progress-student": "studentToProspect",
+      "progress-prospect": "prospectToGuardian",
+      "progress-guardian": "guardianToSenior",
+      "progress-senior": "seniorToMonitor",
+      "progress-monitor": "monitorToLieutenant"
+    };
+
+    Object.entries(mappings).forEach(([barId, storageKey]) => {
+      const percent = calculateProgress(storageKey);
+      document.getElementById(barId).style.width = `${percent}%`;
+    });
+  </script>
+</body>
+</html>
