@@ -2,69 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Temple Guardian Progress Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temple Guardians // Progress Tracker Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background-color: #0d0d0d;
-      color: #f0f0f0;
       font-family: 'Space Grotesk', sans-serif;
-      margin: 0;
-      padding: 2rem;
-      text-align: center;
+      color: #f0f0f0;
+      overflow-x: hidden;
     }
-
+    .hub {
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
     h1 {
+      font-size: 3rem;
       color: #f6c93b;
+      margin-bottom: 1rem;
+    }
+    p.description {
+      font-size: 1.2rem;
+      color: #ccc;
       margin-bottom: 2rem;
     }
-
-    .button-grid {
+    .rank-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      gap: 2rem;
     }
-
-    a.button {
-      display: block;
-      background: #1a1a1a;
-      color: #f6c93b;
-      text-decoration: none;
-      padding: 1rem 1.5rem;
-      border: 2px solid #f6c93b;
+    .rank-card {
+      background-color: #1a1a1a;
+      padding: 1.5rem;
+      border-left: 4px solid #f6c93b;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    a.button:hover {
-      background: #f6c93b;
-      color: #0d0d0d;
+    .rank-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(246, 201, 59, 0.2);
     }
-
-    .back-home {
-      margin-top: 2rem;
-      display: inline-block;
+    .rank-card h3 {
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .rank-card p {
       color: #ccc;
-      text-decoration: underline;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #f6c93b;
+      color: #0d0d0d;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease-in-out;
+    }
+    .back-button:hover {
+      background-color: #ffd84b;
     }
   </style>
 </head>
 <body>
-  <h1>Temple Guardian Progress Tracker</h1>
-
-  <div class="button-grid">
-    <a class="button" href="pledge.html">Pledge ➝ Student</a>
-    <a class="button" href="student.html">Student ➝ Prospect</a>
-    <a class="button" href="prospect.html">Prospect ➝ Temple Guardian</a>
-    <a class="button" href="temple_guardian.html">Temple Guardian ➝ STG</a>
-    <a class="button" href="senior_tg.html">Senior TG ➝ Monitor</a>
-    <a class="button" href="monitor.html">Monitor ➝ Lieutenant</a>
-    <a class="button" href="lieutenant.html">Lieutenant ➝ Captain</a>
-  </div>
-
-  <a class="back-home" href="index.html">← Back to Main Hub</a>
+  <section class="hub">
+    <h1>Rank Progress Tracker</h1>
+    <p class="description">Select a rank path below to begin or update your tracking progress. Each step saves locally in your browser.</p>
+    <div class="rank-grid">
+      <div class="rank-card">
+        <h3>Pledge ➤ Student</h3>
+        <p>Complete your tryout or academy requirements.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Student ➤ Prospect</h3>
+        <p>8 duty hours, 6 key trainings, 4 days minimum.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Prospect ➤ Temple Guardian</h3>
+        <p>12 hours, evaluations & trainings, 8 days minimum.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Temple Guardian ➤ Senior</h3>
+        <p>24 hours, certifications, host doctrine, advise Academy.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Senior ➤ Monitor</h3>
+        <p>30 hours, host multiple sessions, Academy service.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Monitor ➤ Lieutenant</h3>
+        <p>4x trainings hosted, HiCOMM vote, 2 weeks minimum.</p>
+      </div>
+      <div class="rank-card">
+        <h3>Lieutenant ➤ Captain</h3>
+        <p>Handpicked by Command. Full mastery and leadership.</p>
+      </div>
+    </div>
+    <a href="index.html" class="back-button">← Back to Main Hub</a>
+  </section>
 </body>
 </html>
