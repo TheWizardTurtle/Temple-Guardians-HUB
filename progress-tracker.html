@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temple Guardian Progress Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #f0f0f0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #f6c93b;
+      margin-bottom: 2rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #f6c93b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-shadow: 0 0 8px #f6c93b;
+    }
+
+    section {
+      margin-bottom: 4rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2rem;
+      border-left: 4px solid #f6c93b;
+    }
+
+    h2 {
+      color: #f6c93b;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      accent-color: #f6c93b;
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Temple Guardian Progress Tracker</h1>
+    <nav>
+      <a href="#pledge">Pledge</a>
+      <a href="#student">Student</a>
+      <a href="#prospect">Prospect</a>
+      <a href="#guardian">Guardian</a>
+      <a href="#senior">Senior</a>
+      <a href="#monitor">Monitor</a>
+      <a href="#lieutenant">Lieutenant</a>
+      <a href="#captain">Captain</a>
+    </nav>
+
+    <!-- Repeat this block per rank -->
+    <section id="pledge">
+      <h2>Pledge</h2>
+      <p>To achieve this rank, you must pass the Temple Guardian tryout or complete the academy.</p>
+      <ul>
+        <li><label><input type="checkbox" data-id="pledge-1">Passed TG Tryout</label></li>
+        <li><label><input type="checkbox" data-id="pledge-2">Completed the Academy</label></li>
+      </ul>
+    </section>
+
+    <section id="student">
+      <h2>Student</h2>
+      <p>You must have 8 hours on-duty and attend key trainings. Must be in TG for 4 days.</p>
+      <ul>
+        <li><label><input type="checkbox" data-id="student-1">8 Hours On-Duty</label></li>
+        <li><label><input type="checkbox" data-id="student-2">Primary Training</label></li>
+        <li><label><input type="checkbox" data-id="student-3">Anti-TK Training</label></li>
+        <li><label><input type="checkbox" data-id="student-4">Combat Training</label></li>
+        <li><label><input type="checkbox" data-id="student-5">Doctrine Training</label></li>
+        <li><label><input type="checkbox" data-id="student-6">Disciplinary Training</label></li>
+        <li><label><input type="checkbox" data-id="student-7">Law Evaluation</label></li>
+        <li><label><input type="checkbox" data-id="student-8">4 Days in TG</label></li>
+      </ul>
+    </section>
+
+    <!-- Add Prospect, Guardian, etc in the same format -->
+
+    <section id="prospect">
+      <h2>Prospect</h2>
+      <p>12 hours on-duty, specific training attendance, 8+ days in TG.</p>
+      <ul>
+        <li><label><input type="checkbox" data-id="prospect-1">12 Hours On-Duty</label></li>
+        <li><label><input type="checkbox" data-id="prospect-2">1 Anti-TK Training</label></li>
+        <li><label><input type="checkbox" data-id="prospect-3">1 Combat Training</label></li>
+        <li><label><input type="checkbox" data-id="prospect-4">2 Disciplinary Trainings</label></li>
+        <li><label><input type="checkbox" data-id="prospect-5">2 Law Evaluations</label></li>
+        <li><label><input type="checkbox" data-id="prospect-6">8 Days in TG</label></li>
+      </ul>
+    </section>
+
+    <!-- Add more ranks here using the same structure -->
+
+    <section id="captain">
+      <h2>Captain</h2>
+      <p>Must be handpicked by the Chief of Security and Commander. You lead a sub-division.</p>
+      <ul>
+        <li><label><input type="checkbox" data-id="captain-1">Handpicked by Chief & Commander</label></li>
+        <li><label><input type="checkbox" data-id="captain-2">Leads TG Sub-Division (Honor Guard, Academy, etc)</label></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 Temple Guardians — Progress Tracker
+    </footer>
+  </div>
+
+  <script>
+    // Save and load checkbox states via localStorage
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      const id = checkbox.dataset.id;
+      checkbox.checked = localStorage.getItem(id) === 'true';
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(id, checkbox.checked);
+      });
+    });
+  </script>
+</body>
+</html>
