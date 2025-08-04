@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Progress: Pledge ➤ Student</title>
+  <title>Pledge ➤ Student Progress</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -11,30 +11,57 @@
       font-family: 'Space Grotesk', sans-serif;
       color: #f0f0f0;
       padding: 2rem;
+      margin: 0;
+    }
+
+    .container {
       max-width: 700px;
       margin: 0 auto;
+      background-color: #1a1a1a;
+      padding: 2rem;
+      border-left: 4px solid #f6c93b;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(246, 201, 59, 0.05);
     }
+
     h1 {
-      color: #f6c93b;
       font-size: 2rem;
-      margin-bottom: 1rem;
+      color: #f6c93b;
+      margin-bottom: 0.5rem;
     }
+
     p.subtitle {
-      color: #aaa;
+      color: #bbb;
       margin-bottom: 2rem;
+      font-size: 1rem;
     }
+
     .requirement {
       display: flex;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      background: #111;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
-    .requirement input {
+
+    .requirement:hover {
+      background: #181818;
+    }
+
+    .requirement input[type="checkbox"] {
       margin-right: 1rem;
-      transform: scale(1.2);
+      transform: scale(1.3);
+      accent-color: #f6c93b;
     }
-    .requirement label {
-      font-size: 1.1rem;
+
+    label {
+      font-size: 1rem;
+      color: #eee;
+      cursor: pointer;
     }
+
     .back-button {
       display: inline-block;
       margin-top: 2rem;
@@ -44,23 +71,41 @@
       font-weight: bold;
       text-decoration: none;
       border-radius: 6px;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .back-button:hover {
+      background-color: #ffd84b;
+    }
+
+    @media (max-width: 600px) {
+      .requirement {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .requirement input {
+        margin-bottom: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Pledge ➤ Student</h1>
-  <p class="subtitle">Complete the following requirements to progress to Student.</p>
+  <div class="container">
+    <h1>Pledge ➤ Student</h1>
+    <p class="subtitle">Complete the following requirements to progress to Student. Your progress is saved locally in your browser.</p>
 
-  <div class="requirement"><input type="checkbox" id="r1"><label for="r1">8 hours of on-duty time logged</label></div>
-  <div class="requirement"><input type="checkbox" id="r2"><label for="r2">Attend 1 Primary Training</label></div>
-  <div class="requirement"><input type="checkbox" id="r3"><label for="r3">Attend 1 Anti-TK Training</label></div>
-  <div class="requirement"><input type="checkbox" id="r4"><label for="r4">Attend 1 Combat Training</label></div>
-  <div class="requirement"><input type="checkbox" id="r5"><label for="r5">Attend 1 Doctrine Training</label></div>
-  <div class="requirement"><input type="checkbox" id="r6"><label for="r6">Attend 1 Disciplinary Training</label></div>
-  <div class="requirement"><input type="checkbox" id="r7"><label for="r7">Attend 1 Law Evaluation</label></div>
-  <div class="requirement"><input type="checkbox" id="r8"><label for="r8">Be in Temple Guardians for at least 4 days</label></div>
+    <div class="requirement"><input type="checkbox" id="r1"><label for="r1">8 hours of on-duty time logged</label></div>
+    <div class="requirement"><input type="checkbox" id="r2"><label for="r2">Attend 1 Primary Training</label></div>
+    <div class="requirement"><input type="checkbox" id="r3"><label for="r3">Attend 1 Anti-TK Training</label></div>
+    <div class="requirement"><input type="checkbox" id="r4"><label for="r4">Attend 1 Combat Training</label></div>
+    <div class="requirement"><input type="checkbox" id="r5"><label for="r5">Attend 1 Doctrine Training</label></div>
+    <div class="requirement"><input type="checkbox" id="r6"><label for="r6">Attend 1 Disciplinary Training</label></div>
+    <div class="requirement"><input type="checkbox" id="r7"><label for="r7">Attend 1 Law Evaluation</label></div>
+    <div class="requirement"><input type="checkbox" id="r8"><label for="r8">Be in Temple Guardians for at least 4 days</label></div>
 
-  <a href="progresstrackerhub.html" class="back-button">← Back to Tracker Hub</a>
+    <a href="progresstrackerhub.html" class="back-button">← Back to Tracker Hub</a>
+  </div>
 
   <script>
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
