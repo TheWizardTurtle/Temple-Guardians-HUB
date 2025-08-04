@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pledge ➤ Student | Progress Tracker</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -17,48 +17,67 @@
       max-width: 800px;
       margin: auto;
       background-color: #1a1a1a;
-      padding: 2rem;
-      border-radius: 8px;
+      padding: 2.5rem;
+      border-radius: 12px;
       border-left: 4px solid #f6c93b;
+      box-shadow: 0 0 20px rgba(246, 201, 59, 0.1);
     }
     h1 {
       color: #f6c93b;
       margin-bottom: 1rem;
+      font-size: 2.2rem;
     }
-    p {
-      margin-bottom: 1.5rem;
+    p.description {
+      margin-bottom: 2rem;
       color: #ccc;
+      font-size: 1.1rem;
+    }
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
     }
     label {
-      display: block;
-      margin-bottom: 0.75rem;
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      background-color: #2a2a2a;
+      padding: 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
       cursor: pointer;
     }
+    label:hover {
+      background-color: #333;
+    }
     input[type="checkbox"] {
-      margin-right: 0.5rem;
+      margin-right: 1rem;
+      width: 20px;
+      height: 20px;
+      accent-color: #f6c93b;
+      cursor: pointer;
     }
     .back-link {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.6rem 1.2rem;
+      margin-top: 2.5rem;
+      padding: 0.8rem 1.5rem;
       background-color: #f6c93b;
       color: #0d0d0d;
       font-weight: bold;
       text-decoration: none;
       border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
     .back-link:hover {
-      background-color: #ffd84b;
+      background-color: #ffe05c;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Pledge ➤ Student</h1>
-    <p>Complete the following to advance to the Student rank. Progress is saved in your browser automatically.</p>
+    <p class="description">Complete all requirements below to progress to Student. Your progress saves automatically in your browser.</p>
 
-    <form id="requirements-form">
+    <form id="requirements-form" class="checkbox-list">
       <label><input type="checkbox" name="dutyHours"> 8 hours of on-duty time logged</label>
       <label><input type="checkbox" name="primaryTraining"> Attended 1 Primary Training</label>
       <label><input type="checkbox" name="antiTK"> Attended 1 Anti-TK Training</label>
@@ -76,10 +95,8 @@
     const STORAGE_KEY = 'pledgeToStudent';
     const form = document.getElementById('requirements-form');
 
-    // Load existing progress
+    // Load from localStorage
     const savedProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-
-    // Restore checkbox states
     for (const [name, value] of Object.entries(savedProgress)) {
       const checkbox = form.elements[name];
       if (checkbox) checkbox.checked = value;
