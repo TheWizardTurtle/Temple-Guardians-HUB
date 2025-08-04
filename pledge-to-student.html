@@ -2,99 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pledge ➤ Student Progress</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Progress: Pledge ➤ Student</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #0d0d0d;
       font-family: 'Space Grotesk', sans-serif;
       color: #f0f0f0;
       padding: 2rem;
-      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
     }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-    }
-
     h1 {
-      font-size: 2.5rem;
       color: #f6c93b;
-      text-align: center;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-
-    p.description {
-      color: #ccc;
-      text-align: center;
+    p.subtitle {
+      color: #aaa;
       margin-bottom: 2rem;
     }
-
-    .checkbox-list {
-      background: #1a1a1a;
-      padding: 2rem;
-      border-left: 5px solid #f6c93b;
-      border-radius: 8px;
-    }
-
-    label {
-      display: block;
+    .requirement {
+      display: flex;
+      align-items: center;
       margin-bottom: 1rem;
-      font-size: 1rem;
-      cursor: pointer;
     }
-
-    input[type="checkbox"] {
-      margin-right: 0.75rem;
+    .requirement input {
+      margin-right: 1rem;
       transform: scale(1.2);
     }
-
-    .back-link {
+    .requirement label {
+      font-size: 1.1rem;
+    }
+    .back-button {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.75rem 1.25rem;
+      padding: 0.75rem 1.5rem;
       background-color: #f6c93b;
       color: #0d0d0d;
       font-weight: bold;
       text-decoration: none;
       border-radius: 6px;
-      transition: background 0.3s ease;
-    }
-
-    .back-link:hover {
-      background-color: #ffe66d;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Pledge ➤ Student</h1>
-    <p class="description">To achieve this rank, complete the tryout or academy. This indicates you're combat-ready and law-competent as a new Temple Guardian.</p>
+  <h1>Pledge ➤ Student</h1>
+  <p class="subtitle">Complete the following requirements to progress to Student.</p>
 
-    <div class="checkbox-list">
-      <label><input type="checkbox" id="req1" /> Passed the Temple Guardian Tryout</label>
-      <label><input type="checkbox" id="req2" /> OR Completed the Temple Guardian Academy</label>
-      <label><input type="checkbox" id="req3" /> Gained sufficient combat knowledge</label>
-      <label><input type="checkbox" id="req4" /> Demonstrated basic law understanding</label>
-    </div>
+  <div class="requirement"><input type="checkbox" id="r1"><label for="r1">8 hours of on-duty time logged</label></div>
+  <div class="requirement"><input type="checkbox" id="r2"><label for="r2">Attend 1 Primary Training</label></div>
+  <div class="requirement"><input type="checkbox" id="r3"><label for="r3">Attend 1 Anti-TK Training</label></div>
+  <div class="requirement"><input type="checkbox" id="r4"><label for="r4">Attend 1 Combat Training</label></div>
+  <div class="requirement"><input type="checkbox" id="r5"><label for="r5">Attend 1 Doctrine Training</label></div>
+  <div class="requirement"><input type="checkbox" id="r6"><label for="r6">Attend 1 Disciplinary Training</label></div>
+  <div class="requirement"><input type="checkbox" id="r7"><label for="r7">Attend 1 Law Evaluation</label></div>
+  <div class="requirement"><input type="checkbox" id="r8"><label for="r8">Be in Temple Guardians for at least 4 days</label></div>
 
-    <a href="progresstrackerhub.html" class="back-link">← Back to Tracker Hub</a>
-  </div>
+  <a href="progresstrackerhub.html" class="back-button">← Back to Tracker Hub</a>
 
   <script>
-    const ids = ['req1', 'req2', 'req3', 'req4'];
-
-    ids.forEach(id => {
-      const box = document.getElementById(id);
-      // Load state
-      const saved = localStorage.getItem('pledge_' + id);
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((box, index) => {
+      const saved = localStorage.getItem(`pledge-student-${index}`);
       if (saved === 'true') box.checked = true;
 
-      // Save state on change
       box.addEventListener('change', () => {
-        localStorage.setItem('pledge_' + id, box.checked);
+        localStorage.setItem(`pledge-student-${index}`, box.checked);
       });
     });
   </script>
