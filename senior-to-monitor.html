@@ -3,120 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Senior ➤ Monitor</title>
+  <title>Senior ➤ Monitor | Progress Tracker</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #0d0d0d;
       font-family: 'Space Grotesk', sans-serif;
       color: #f0f0f0;
-      padding: 2rem;
       margin: 0;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      background-color: #1a1a1a;
       padding: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #1a1a1a;
+      padding: 2.5rem;
+      border-radius: 12px;
       border-left: 4px solid #f6c93b;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(246, 201, 59, 0.05);
+      box-shadow: 0 0 20px rgba(246, 201, 59, 0.1);
     }
-
     h1 {
-      font-size: 2rem;
       color: #f6c93b;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 2.2rem;
     }
-
-    p.subtitle {
-      color: #bbb;
+    p.description {
       margin-bottom: 2rem;
-      font-size: 1rem;
+      color: #ccc;
+      font-size: 1.1rem;
     }
-
-    .requirement {
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    label {
       display: flex;
       align-items: center;
-      margin-bottom: 1.2rem;
-      background: #111;
-      padding: 0.75rem 1rem;
+      background-color: #2a2a2a;
+      padding: 1rem;
       border-radius: 6px;
       transition: background 0.3s ease;
-    }
-
-    .requirement:hover {
-      background: #181818;
-    }
-
-    .requirement input[type="checkbox"] {
-      margin-right: 1rem;
-      transform: scale(1.3);
-      accent-color: #f6c93b;
-    }
-
-    label {
-      font-size: 1rem;
-      color: #eee;
       cursor: pointer;
     }
-
-    .back-button {
+    label:hover {
+      background-color: #333;
+    }
+    input[type="checkbox"] {
+      margin-right: 1rem;
+      width: 20px;
+      height: 20px;
+      accent-color: #f6c93b;
+      cursor: pointer;
+    }
+    .back-link {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
+      margin-top: 2.5rem;
+      padding: 0.8rem 1.5rem;
       background-color: #f6c93b;
       color: #0d0d0d;
       font-weight: bold;
       text-decoration: none;
-      border-radius: 6px;
-      transition: background 0.3s ease-in-out;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
-
-    .back-button:hover {
-      background-color: #ffd84b;
-    }
-
-    @media (max-width: 600px) {
-      .requirement {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .requirement input {
-        margin-bottom: 0.5rem;
-      }
+    .back-link:hover {
+      background-color: #ffe05c;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Senior ➤ Monitor</h1>
-    <p class="subtitle">Complete these to earn the rank of Temple Guardian Monitor. Progress is saved in your browser.</p>
+    <p class="description">Check off your progress below to track your advancement to Temple Guardian Monitor.</p>
 
-    <div class="requirement"><input type="checkbox" id="r1"><label for="r1">Minimum of 30 hours logged</label></div>
-    <div class="requirement"><input type="checkbox" id="r2"><label for="r2">Attend Doctrine Training III</label></div>
-    <div class="requirement"><input type="checkbox" id="r3"><label for="r3">Host 2 Combat Trainings</label></div>
-    <div class="requirement"><input type="checkbox" id="r4"><label for="r4">Host 2 Anti-TK Trainings</label></div>
-    <div class="requirement"><input type="checkbox" id="r5"><label for="r5">Host 2 Law Evaluations</label></div>
-    <div class="requirement"><input type="checkbox" id="r6"><label for="r6">Host 2 Doctrine Trainings (I or II)</label></div>
-    <div class="requirement"><input type="checkbox" id="r7"><label for="r7">Host 2 Disciplinary Trainings</label></div>
-    <div class="requirement"><input type="checkbox" id="r8"><label for="r8">Wait 2 weeks after promotion to Senior</label></div>
-    <div class="requirement"><input type="checkbox" id="r9"><label for="r9">Regular Academy activity</label></div>
+    <form id="requirements-form" class="checkbox-list">
+      <label><input type="checkbox" name="hours30"> Logged at least 30 duty hours</label>
+      <label><input type="checkbox" name="attendedDoctrine3"> Attended Doctrine Training III</label>
+      <label><input type="checkbox" name="hosted2Combat"> Hosted 2 Combat Trainings</label>
+      <label><input type="checkbox" name="hosted2AntiTK"> Hosted 2 Anti-TK Trainings</label>
+      <label><input type="checkbox" name="hosted2LawEval"> Hosted 2 Law Evaluations</label>
+      <label><input type="checkbox" name="hosted2Doctrine"> Hosted 2 Doctrine Trainings (1-2)</label>
+      <label><input type="checkbox" name="hosted2Disciplinary"> Hosted 2 Disciplinary Trainings</label>
+      <label><input type="checkbox" name="wait2Weeks"> Waited 2 weeks after Senior rank-up</label>
+      <label><input type="checkbox" name="academyService"> Actively fulfilling TG Academy service</label>
+    </form>
 
-    <a href="progresstrackerhub.html" class="back-button">← Back to Tracker Hub</a>
+    <a href="progresstrackerhub.html" class="back-link">← Back to Tracker Hub</a>
   </div>
 
   <script>
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((box, index) => {
-      const saved = localStorage.getItem(`senior-monitor-${index}`);
-      if (saved === 'true') box.checked = true;
+    const STORAGE_KEY = 'seniorToMonitor';
+    const form = document.getElementById('requirements-form');
 
-      box.addEventListener('change', () => {
-        localStorage.setItem(`senior-monitor-${index}`, box.checked);
-      });
+    const savedProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    for (const [name, value] of Object.entries(savedProgress)) {
+      const checkbox = form.elements[name];
+      if (checkbox) checkbox.checked = value;
+    }
+
+    form.addEventListener('change', () => {
+      const progress = {};
+      for (const element of form.elements) {
+        if (element.type === 'checkbox') {
+          progress[element.name] = element.checked;
+        }
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     });
   </script>
 </body>
