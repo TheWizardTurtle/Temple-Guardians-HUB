@@ -194,12 +194,22 @@
       margin-bottom: 2rem;
     }
     .card {
-      background: #1a1a1a;
-      margin: 1rem auto;
-      padding: 1.5rem;
-      max-width: 600px;
-      border-left: 4px solid #f6c93b;
-    }
+  background: #1a1a1a;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  max-width: 600px;
+  border-left: 4px solid #f6c93b;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(246, 201, 59, 0.2);
+}
     .card h3 {
       margin-bottom: 0.5rem;
       color: #fff;
@@ -243,24 +253,24 @@
       <a href="progresstrackerhub.html" class="tracker-button">Progress Tracker Hub</a>
     </header>
     <section>
-      <h2 class="section-title">Core Resources</h2>
-      <div class="card">
-        <h3>📘 Codex</h3>
-        <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
-      </div>
-      <div class="card">
-        <h3>📜 Training Programs</h3>
-        <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
-      </div>
-      <div class="card">
-        <h3>📈 Quota & Logs</h3>
-        <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
-      </div>
-      <div class="card">
-        <h3>🏩 Academy</h3>
-        <p>The Temple Guardian Academy is your tool for mentoring and developing new LRs. STG+ can participate and log time here.</p>
-      </div>
-    </section>
+  <h2 class="section-title">Core Resources</h2>
+  <a href="codex.html" class="card">
+    <h3>📘 Codex</h3>
+    <p>The complete set of regulations, rank structure, laws, and procedures followed by all Temple Guardians. This is our foundation.</p>
+  </a>
+  <a href="trainings.html" class="card">
+    <h3>📜 Training Programs</h3>
+    <p>Combat, Doctrine, Disciplinary, Patrol & more. Stay sharp, stay prepared. All official guides available here.</p>
+  </a>
+  <a href="quota.html" class="card">
+    <h3>📈 Quota & Logs</h3>
+    <p>Track your weekly requirements, on-duty hours, training contributions, and maintain your standing within the division.</p>
+  </a>
+  <a href="roster.html" class="card">
+    <h3>🛡️ TG Roster</h3>
+    <p>View all current Temple Guardians and their ranks, responsibilities, and certifications.</p>
+  </a>
+</section>
     <footer>
       &copy; 2025 Temple Guardians — All Rights Reserved.
     </footer>
